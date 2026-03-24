@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "coverage/**",
+    "dist/**",
+    "mock/**",
+    "node_modules/**",
+    "public/**",
+    "src/.umi/**"
+  ]
+}

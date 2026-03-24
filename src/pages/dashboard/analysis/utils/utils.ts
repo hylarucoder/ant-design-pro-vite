@@ -1,26 +1,24 @@
-import type { RangePickerProps } from 'antd/es/date-picker';
-import dayjs from 'dayjs';
+import type { RangePickerProps } from "antd/es/date-picker";
+import dayjs from "dayjs";
 
-type RangePickerValue = RangePickerProps['value'];
+type RangePickerValue = RangePickerProps["value"];
 
 export function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-export function getTimeDistance(
-  type: 'today' | 'week' | 'month' | 'year',
-): RangePickerValue {
+export function getTimeDistance(type: "today" | "week" | "month" | "year"): RangePickerValue {
   const now = new Date();
   const oneDay = 1000 * 60 * 60 * 24;
 
-  if (type === 'today') {
+  if (type === "today") {
     now.setHours(0);
     now.setMinutes(0);
     now.setSeconds(0);
     return [dayjs(now), dayjs(now.getTime() + (oneDay - 1000))];
   }
 
-  if (type === 'week') {
+  if (type === "week") {
     let day = now.getDay();
     now.setHours(0);
     now.setMinutes(0);
@@ -38,18 +36,15 @@ export function getTimeDistance(
   }
   const year = now.getFullYear();
 
-  if (type === 'month') {
+  if (type === "month") {
     const month = now.getMonth();
-    const nextDate = dayjs(now).add(1, 'months');
+    const nextDate = dayjs(now).add(1, "months");
     const nextYear = nextDate.year();
     const nextMonth = nextDate.month();
 
     return [
       dayjs(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
-      dayjs(
-        dayjs(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() -
-          1000,
-      ),
+      dayjs(dayjs(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000),
     ];
   }
 

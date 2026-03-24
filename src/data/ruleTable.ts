@@ -1,7 +1,4 @@
-import type {
-  TableListItem,
-  TableListParams,
-} from '@/pages/list/table-list/data.d';
+import type { TableListItem, TableListParams } from "@/pages/list/table-list/data.d";
 
 const delay = async (ms = 260) => {
   await new Promise((resolve) => {
@@ -13,14 +10,14 @@ const seedRules = (count: number): TableListItem[] =>
   Array.from({ length: count }).map((_, i) => ({
     key: i,
     disabled: i % 6 === 0,
-    href: 'https://ant.design',
+    href: "https://ant.design",
     avatar: [
-      'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
-      'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png',
+      "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
+      "https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png",
     ][i % 2],
     name: `TradeCode ${i}`,
-    owner: '曲丽丽',
-    desc: '这是一段描述',
+    owner: "曲丽丽",
+    desc: "这是一段描述",
     callNo: 100 + ((i * 37) % 1000),
     status: `${i % 4}`,
     updatedAt: new Date(Date.now() - i * 1000 * 60 * 60),
@@ -38,7 +35,7 @@ export const queryRuleList = async (params: TableListParams = {}) => {
   let data = [...ruleStore];
 
   if (params.name) {
-    data = data.filter((item) => item.name.includes(params.name || ''));
+    data = data.filter((item) => item.name.includes(params.name || ""));
   }
 
   if (params.sorter && Object.keys(params.sorter).length > 0) {
@@ -53,7 +50,7 @@ export const queryRuleList = async (params: TableListParams = {}) => {
           }
           if (left === right) return;
           result = left > right ? 1 : -1;
-          if (value === 'descend') {
+          if (value === "descend") {
             result *= -1;
           }
         }
@@ -87,14 +84,13 @@ export const addRuleItem = async (data: Partial<TableListItem>) => {
   await delay();
   const nextItem: TableListItem = {
     key: Date.now(),
-    href: 'https://ant.design',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
-    name: data.name || '新规则',
-    owner: '曲丽丽',
-    desc: data.desc || '这是一段描述',
+    href: "https://ant.design",
+    avatar: "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
+    name: data.name || "新规则",
+    owner: "曲丽丽",
+    desc: data.desc || "这是一段描述",
     callNo: 100 + (ruleStore.length % 50) * 13,
-    status: '1',
+    status: "1",
     updatedAt: new Date(),
     createdAt: new Date(),
     progress: 40,

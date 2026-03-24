@@ -1,6 +1,6 @@
-import { PageContainer } from '@ant-design/pro-components';
-import { Card, theme } from 'antd';
-import { useEffect } from 'react';
+import { PageContainer } from "@ant-design/pro-components";
+import { Card, theme } from "antd";
+import { useEffect } from "react";
 
 const InfoCard = ({
   title,
@@ -20,32 +20,32 @@ const InfoCard = ({
       style={{
         backgroundColor: token.colorBgContainer,
         boxShadow: token.boxShadow,
-        borderRadius: '8px',
-        fontSize: '14px',
+        borderRadius: "8px",
+        fontSize: "14px",
         color: token.colorTextSecondary,
-        lineHeight: '22px',
-        padding: '16px 19px',
-        minWidth: '220px',
+        lineHeight: "22px",
+        padding: "16px 19px",
+        minWidth: "220px",
         flex: 1,
       }}
     >
       <div
         style={{
-          display: 'flex',
-          gap: '4px',
-          alignItems: 'center',
+          display: "flex",
+          gap: "4px",
+          alignItems: "center",
         }}
       >
         <div
           style={{
             width: 48,
             height: 48,
-            lineHeight: '22px',
-            backgroundSize: '100%',
-            textAlign: 'center',
-            padding: '8px 16px 16px 12px',
-            color: '#FFF',
-            fontWeight: 'bold',
+            lineHeight: "22px",
+            backgroundSize: "100%",
+            textAlign: "center",
+            padding: "8px 16px 16px 12px",
+            color: "#FFF",
+            fontWeight: "bold",
             backgroundImage:
               "url('https://gw.alipayobjects.com/zos/bmw-prod/daaf8d50-8e6d-4251-905d-676a24ddfa12.svg')",
           }}
@@ -54,7 +54,7 @@ const InfoCard = ({
         </div>
         <div
           style={{
-            fontSize: '16px',
+            fontSize: "16px",
             color: token.colorText,
             paddingBottom: 8,
           }}
@@ -64,17 +64,17 @@ const InfoCard = ({
       </div>
       <div
         style={{
-          fontSize: '14px',
+          fontSize: "14px",
           color: token.colorTextSecondary,
-          textAlign: 'justify',
-          lineHeight: '22px',
+          textAlign: "justify",
+          lineHeight: "22px",
           marginBottom: 8,
         }}
       >
         {desc}
       </div>
       <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
+        了解更多 {">"}
       </a>
     </div>
   );
@@ -84,7 +84,7 @@ const WelcomePage = () => {
   const { token } = theme.useToken();
 
   useEffect(() => {
-    document.title = '欢迎页 - Ant Design Pro';
+    document.title = "欢迎页 - Ant Design Pro";
   }, []);
 
   return (
@@ -93,22 +93,22 @@ const WelcomePage = () => {
         style={{ borderRadius: 8 }}
         styles={{
           body: {
-            backgroundImage: 'linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
+            backgroundImage: "linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)",
           },
         }}
       >
         <div
           style={{
-            backgroundPosition: '100% -30%',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '274px auto',
+            backgroundPosition: "100% -30%",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "274px auto",
             backgroundImage:
               "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
           }}
         >
           <div
             style={{
-              fontSize: '20px',
+              fontSize: "20px",
               color: token.colorTextHeading,
             }}
           >
@@ -116,22 +116,21 @@ const WelcomePage = () => {
           </div>
           <p
             style={{
-              fontSize: '14px',
+              fontSize: "14px",
               color: token.colorTextSecondary,
-              lineHeight: '22px',
+              lineHeight: "22px",
               marginTop: 16,
               marginBottom: 32,
-              width: '65%',
+              width: "65%",
             }}
           >
-            这是基于 Ant Design Pro 视觉风格迁到 Vite
-            的版本。页面外观尽量保持原样， 运行方式逐步从 Umi/Max
-            脱离出来，方便后续继续迁真实业务页。
+            这是基于 Ant Design Pro 视觉风格迁到 Vite 的版本。页面外观尽量保持原样， 运行方式逐步从
+            Umi/Max 脱离出来，方便后续继续迁真实业务页。
           </p>
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
+              display: "flex",
+              flexWrap: "wrap",
               gap: 16,
             }}
           >

@@ -1,34 +1,34 @@
-import { Radar } from '@ant-design/plots';
-import { PageContainer } from '@ant-design/pro-components';
-import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { Link } from 'react-router-dom';
-import EditableLinkGroup from '@/pages/dashboard/workplace/components/EditableLinkGroup';
-import useStyles from '@/pages/dashboard/workplace/style.style';
-import { fetchWorkplaceData } from '../data/workplace';
-import { useAsyncData } from '../hooks/useAsyncData';
-import type { ActivitiesType } from '../types/workplace';
+import { Radar } from "@ant-design/plots";
+import { PageContainer } from "@ant-design/pro-components";
+import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from "antd";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Link } from "react-router-dom";
+import EditableLinkGroup from "@/pages/dashboard/workplace/components/EditableLinkGroup";
+import useStyles from "@/pages/dashboard/workplace/style.style";
+import { fetchWorkplaceData } from "../data/workplace";
+import { useAsyncData } from "../hooks/useAsyncData";
+import type { ActivitiesType } from "../types/workplace";
 
 dayjs.extend(relativeTime);
 
 const links = [
-  { title: '操作一', href: '/dashboard/analysis' },
-  { title: '操作二', href: '/welcome' },
-  { title: '操作三', href: '/migration' },
-  { title: '操作四', href: '/dashboard/workplace' },
-  { title: '操作五', href: 'https://pro.ant.design' },
-  { title: '操作六', href: 'https://ant.design' },
+  { title: "操作一", href: "/dashboard/analysis" },
+  { title: "操作二", href: "/welcome" },
+  { title: "操作三", href: "/migration" },
+  { title: "操作四", href: "/dashboard/workplace" },
+  { title: "操作五", href: "https://pro.ant.design" },
+  { title: "操作六", href: "https://ant.design" },
 ];
 
 const currentUser = {
-  avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-  name: '吴彦祖',
-  userid: '00000001',
-  email: 'antdesign@alipay.com',
-  signature: '海纳百川，有容乃大',
-  title: '交互专家',
-  group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+  avatar: "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
+  name: "吴彦祖",
+  userid: "00000001",
+  email: "antdesign@alipay.com",
+  signature: "海纳百川，有容乃大",
+  title: "交互专家",
+  group: "蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED",
 };
 
 const PageHeaderContent = () => {
@@ -96,7 +96,7 @@ const WorkplacePage = () => {
       const nextCount = (segmentCount.get(segment) ?? 0) + 1;
       segmentCount.set(segment, nextCount);
 
-      if (segment === 'group' && item.group) {
+      if (segment === "group" && item.group) {
         return (
           <a
             href={item.group.link}
@@ -109,7 +109,7 @@ const WorkplacePage = () => {
         );
       }
 
-      if (segment === 'project' && item.project) {
+      if (segment === "project" && item.project) {
         return (
           <a
             href={item.project.link}
@@ -122,17 +122,12 @@ const WorkplacePage = () => {
         );
       }
 
-      return (
-        <span key={`${item.id}-text-${segment}-${nextCount}`}>{segment}</span>
-      );
+      return <span key={`${item.id}-text-${segment}-${nextCount}`}>{segment}</span>;
     });
   };
 
   return (
-    <PageContainer
-      content={<PageHeaderContent />}
-      extraContent={<ExtraContent />}
-    >
+    <PageContainer content={<PageHeaderContent />} extraContent={<ExtraContent />}>
       <Row gutter={[24, 24]}>
         <Col xl={16} lg={24} md={24} sm={24} xs={24}>
           <Card
@@ -154,7 +149,7 @@ const WorkplacePage = () => {
                   }
                   description={item.description}
                   style={{
-                    width: '100%',
+                    width: "100%",
                   }}
                 />
                 <div className={styles.projectItemContent}>
@@ -189,12 +184,8 @@ const WorkplacePage = () => {
                     avatar={<Avatar src={item.user.avatar} />}
                     title={
                       <span>
-                        <span className={styles.username}>
-                          {item.user.name}
-                        </span>{' '}
-                        <span className={styles.event}>
-                          {renderActivityText(item)}
-                        </span>
+                        <span className={styles.username}>{item.user.name}</span>{" "}
+                        <span className={styles.event}>{renderActivityText(item)}</span>
                       </span>
                     }
                     description={
@@ -210,11 +201,7 @@ const WorkplacePage = () => {
         </Col>
 
         <Col xl={8} lg={24} md={24} sm={24} xs={24}>
-          <Card
-            style={{ marginBottom: 24 }}
-            title="快速开始 / 便捷导航"
-            variant="borderless"
-          >
+          <Card style={{ marginBottom: 24 }} title="快速开始 / 便捷导航" variant="borderless">
             <EditableLinkGroup onAdd={() => {}} links={links} linkElement="a" />
           </Card>
 
@@ -243,8 +230,8 @@ const WorkplacePage = () => {
               }}
               legend={{
                 color: {
-                  position: 'bottom',
-                  layout: { justifyContent: 'center' },
+                  position: "bottom",
+                  layout: { justifyContent: "center" },
                 },
               }}
             />
@@ -271,9 +258,7 @@ const WorkplacePage = () => {
                       rel="noreferrer"
                     >
                       <Avatar src={item.logo} size="small" />
-                      <span className={styles.member}>
-                        {item.member.substring(0, 3)}
-                      </span>
+                      <span className={styles.member}>{item.member.substring(0, 3)}</span>
                     </a>
                   </Col>
                 ))}

@@ -3,26 +3,16 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from '@ant-design/icons';
-import {
-  Avatar,
-  Card,
-  Col,
-  Dropdown,
-  Form,
-  List,
-  Row,
-  Select,
-  Tooltip,
-} from 'antd';
-import numeral from 'numeral';
-import { useEffect, useState } from 'react';
-import { categoryOptions } from '@/pages/list/mock';
-import StandardFormRow from '@/pages/list/search/applications/components/StandardFormRow';
-import TagSelect from '@/pages/list/search/applications/components/TagSelect';
-import type { ListItemDataType } from '@/pages/list/search/applications/data.d';
-import useStyles from '@/pages/list/search/applications/style.style';
-import { loadSearchItems } from '../data/demoList';
+} from "@ant-design/icons";
+import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from "antd";
+import numeral from "numeral";
+import { useEffect, useState } from "react";
+import { categoryOptions } from "@/pages/list/mock";
+import StandardFormRow from "@/pages/list/search/applications/components/StandardFormRow";
+import TagSelect from "@/pages/list/search/applications/components/TagSelect";
+import type { ListItemDataType } from "@/pages/list/search/applications/data.d";
+import useStyles from "@/pages/list/search/applications/style.style";
+import { loadSearchItems } from "../data/demoList";
 
 const CardInfo = ({
   activeUser,
@@ -53,7 +43,7 @@ const SearchApplicationsPage = () => {
 
   const reload = async () => {
     setLoading(true);
-    const result = await loadSearchItems(8, 'application-search');
+    const result = await loadSearchItems(8, "application-search");
     setList(result.list);
     setLoading(false);
   };
@@ -75,16 +65,11 @@ const SearchApplicationsPage = () => {
               <TagSelect expandable>
                 {categoryOptions
                   .filter(
-                    (
-                      category,
-                    ): category is { value: string | number; label: string } =>
+                    (category): category is { value: string | number; label: string } =>
                       category.value !== undefined && category.value !== null,
                   )
                   .map((category) => (
-                    <TagSelect.Option
-                      value={category.value}
-                      key={category.value}
-                    >
+                    <TagSelect.Option value={category.value} key={category.value}>
                       {category.label}
                     </TagSelect.Option>
                   ))}
@@ -101,8 +86,8 @@ const SearchApplicationsPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
-                    options={[{ label: '王昭君', value: 'lisa' }]}
+                    style={{ maxWidth: 200, width: "100%" }}
+                    options={[{ label: "王昭君", value: "lisa" }]}
                   />
                 </Form.Item>
               </Col>
@@ -114,10 +99,10 @@ const SearchApplicationsPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
+                    style={{ maxWidth: 200, width: "100%" }}
                     options={[
-                      { label: '优秀', value: 'good' },
-                      { label: '普通', value: 'normal' },
+                      { label: "优秀", value: "good" },
+                      { label: "普通", value: "normal" },
                     ]}
                   />
                 </Form.Item>
@@ -151,8 +136,8 @@ const SearchApplicationsPage = () => {
                   key="ellipsis"
                   menu={{
                     items: [
-                      { key: '1', label: '操作一' },
-                      { key: '2', label: '操作二' },
+                      { key: "1", label: "操作一" },
+                      { key: "2", label: "操作二" },
                     ],
                   }}
                 >
@@ -160,10 +145,7 @@ const SearchApplicationsPage = () => {
                 </Dropdown>,
               ]}
             >
-              <Card.Meta
-                avatar={<Avatar size="small" src={item.avatar} />}
-                title={item.title}
-              />
+              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
               <div>
                 <CardInfo
                   activeUser={
@@ -172,10 +154,10 @@ const SearchApplicationsPage = () => {
                         {Math.floor(item.activeUser / 10000)}
                         <span
                           style={{
-                            position: 'relative',
+                            position: "relative",
                             top: -2,
                             fontSize: 14,
-                            fontStyle: 'normal',
+                            fontStyle: "normal",
                             marginLeft: 2,
                           }}
                         >
@@ -186,7 +168,7 @@ const SearchApplicationsPage = () => {
                       item.activeUser
                     )
                   }
-                  newUser={numeral(item.newUser).format('0,0')}
+                  newUser={numeral(item.newUser).format("0,0")}
                 />
               </div>
             </Card>

@@ -1,35 +1,30 @@
-import {
-  ClusterOutlined,
-  ContactsOutlined,
-  HomeOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import { GridContent } from '@ant-design/pro-components';
-import type { InputRef } from 'antd';
-import { Avatar, Card, Col, Divider, Input, List, Row, Tag } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import numeral from 'numeral';
-import { useEffect, useRef, useState } from 'react';
-import useStyles from '@/pages/account/center/Center.style';
-import useApplicationStyles from '@/pages/account/center/components/Applications/index.style';
-import ArticleListContent from '@/pages/account/center/components/ArticleListContent';
-import useArticleStyles from '@/pages/account/center/components/Articles/index.style';
-import AvatarList from '@/pages/account/center/components/AvatarList';
-import useProjectStyles from '@/pages/account/center/components/Projects/index.style';
+import { ClusterOutlined, ContactsOutlined, HomeOutlined, PlusOutlined } from "@ant-design/icons";
+import { GridContent } from "@ant-design/pro-components";
+import type { InputRef } from "antd";
+import { Avatar, Card, Col, Divider, Input, List, Row, Tag } from "antd";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import numeral from "numeral";
+import { useEffect, useRef, useState } from "react";
+import useStyles from "@/pages/account/center/Center.style";
+import useApplicationStyles from "@/pages/account/center/components/Applications/index.style";
+import ArticleListContent from "@/pages/account/center/components/ArticleListContent";
+import useArticleStyles from "@/pages/account/center/components/Articles/index.style";
+import AvatarList from "@/pages/account/center/components/AvatarList";
+import useProjectStyles from "@/pages/account/center/components/Projects/index.style";
 import type {
   CurrentUser,
   ListItemDataType,
   TagType,
   tabKeyType,
-} from '@/pages/account/center/data.d';
-import { fetchCenterCurrentUser, fetchCenterList } from '../data/account';
+} from "@/pages/account/center/data.d";
+import { fetchCenterCurrentUser, fetchCenterList } from "../data/account";
 
 dayjs.extend(relativeTime);
 
 const operationTabList = [
   {
-    key: 'articles',
+    key: "articles",
     tab: (
       <span>
         文章 <span style={{ fontSize: 14 }}>(8)</span>
@@ -37,7 +32,7 @@ const operationTabList = [
     ),
   },
   {
-    key: 'applications',
+    key: "applications",
     tab: (
       <span>
         应用 <span style={{ fontSize: 14 }}>(8)</span>
@@ -45,7 +40,7 @@ const operationTabList = [
     ),
   },
   {
-    key: 'projects',
+    key: "projects",
     tab: (
       <span>
         项目 <span style={{ fontSize: 14 }}>(8)</span>
@@ -54,12 +49,12 @@ const operationTabList = [
   },
 ];
 
-const TagList = ({ tags }: { tags: CurrentUser['tags'] }) => {
+const TagList = ({ tags }: { tags: CurrentUser["tags"] }) => {
   const { styles } = useStyles();
   const ref = useRef<InputRef | null>(null);
   const [newTags, setNewTags] = useState<TagType[]>([]);
   const [inputVisible, setInputVisible] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div className={styles.tags}>
@@ -76,33 +71,21 @@ const TagList = ({ tags }: { tags: CurrentUser['tags'] }) => {
           onChange={(event) => setInputValue(event.target.value)}
           onBlur={() => {
             let tempTags = [...newTags];
-            if (
-              inputValue &&
-              tempTags.filter((tag) => tag.label === inputValue).length === 0
-            ) {
-              tempTags = [
-                ...tempTags,
-                { key: `new-${tempTags.length}`, label: inputValue },
-              ];
+            if (inputValue && tempTags.filter((tag) => tag.label === inputValue).length === 0) {
+              tempTags = [...tempTags, { key: `new-${tempTags.length}`, label: inputValue }];
             }
             setNewTags(tempTags);
             setInputVisible(false);
-            setInputValue('');
+            setInputValue("");
           }}
           onPressEnter={() => {
             let tempTags = [...newTags];
-            if (
-              inputValue &&
-              tempTags.filter((tag) => tag.label === inputValue).length === 0
-            ) {
-              tempTags = [
-                ...tempTags,
-                { key: `new-${tempTags.length}`, label: inputValue },
-              ];
+            if (inputValue && tempTags.filter((tag) => tag.label === inputValue).length === 0) {
+              tempTags = [...tempTags, { key: `new-${tempTags.length}`, label: inputValue }];
             }
             setNewTags(tempTags);
             setInputVisible(false);
-            setInputValue('');
+            setInputValue("");
           }}
         />
       )}
@@ -112,7 +95,7 @@ const TagList = ({ tags }: { tags: CurrentUser['tags'] }) => {
             setInputVisible(true);
             ref.current?.focus();
           }}
-          style={{ borderStyle: 'dashed' }}
+          style={{ borderStyle: "dashed" }}
         >
           <PlusOutlined />
         </Tag>
@@ -126,7 +109,7 @@ const AccountCenterPage = () => {
   const { styles: articleStyles } = useArticleStyles();
   const { styles: applicationStyles } = useApplicationStyles();
   const { styles: projectStyles } = useProjectStyles();
-  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
+  const [tabKey, setTabKey] = useState<tabKeyType>("articles");
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const [listData, setListData] = useState<ListItemDataType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -134,21 +117,14 @@ const AccountCenterPage = () => {
   useEffect(() => {
     void (async () => {
       setLoading(true);
-      const [user, list] = await Promise.all([
-        fetchCenterCurrentUser(),
-        fetchCenterList(30),
-      ]);
+      const [user, list] = await Promise.all([fetchCenterCurrentUser(), fetchCenterList(30)]);
       setCurrentUser(user);
       setListData(list.list);
       setLoading(false);
     })();
   }, []);
 
-  const renderUserInfo = ({
-    title,
-    group,
-    geographic,
-  }: Partial<CurrentUser>) => (
+  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => (
     <div className={styles.detail}>
       <p>
         <ContactsOutlined style={{ marginRight: 8 }} />
@@ -160,8 +136,8 @@ const AccountCenterPage = () => {
       </p>
       <p>
         <HomeOutlined style={{ marginRight: 8 }} />
-        {(geographic || { province: { label: '' } }).province.label}
-        {(geographic || { city: { label: '' } }).city.label}
+        {(geographic || { province: { label: "" } }).province.label}
+        {(geographic || { city: { label: "" } }).city.label}
       </p>
     </div>
   );
@@ -173,7 +149,7 @@ const AccountCenterPage = () => {
       rowKey="id"
       itemLayout="vertical"
       dataSource={listData}
-      style={{ margin: '0 -24px' }}
+      style={{ margin: "0 -24px" }}
       renderItem={(item) => (
         <List.Item
           key={item.id}
@@ -212,10 +188,7 @@ const AccountCenterPage = () => {
       renderItem={(item) => (
         <List.Item key={item.id}>
           <Card hoverable styles={{ body: { paddingBottom: 20 } }}>
-            <Card.Meta
-              avatar={<Avatar size="small" src={item.avatar} />}
-              title={item.title}
-            />
+            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
             <div className={applicationStyles.cardInfo}>
               <div>
                 <p>活跃用户</p>
@@ -227,7 +200,7 @@ const AccountCenterPage = () => {
               </div>
               <div>
                 <p>新增用户</p>
-                <p>{numeral(item.newUser).format('0,0')}</p>
+                <p>{numeral(item.newUser).format("0,0")}</p>
               </div>
             </div>
           </Card>
@@ -249,10 +222,7 @@ const AccountCenterPage = () => {
             hoverable
             cover={<img alt={item.title} src={item.cover} />}
           >
-            <Card.Meta
-              title={<a>{item.title}</a>}
-              description={item.subDescription}
-            />
+            <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
             <div className={projectStyles.cardItemContent}>
               <span>{dayjs(item.updatedAt).fromNow()}</span>
               <div className={projectStyles.avatarList}>
@@ -274,8 +244,8 @@ const AccountCenterPage = () => {
   );
 
   const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === 'projects') return renderProjects();
-    if (tabValue === 'applications') return renderApplications();
+    if (tabValue === "projects") return renderProjects();
+    if (tabValue === "applications") return renderApplications();
     return renderArticles();
   };
 
@@ -283,11 +253,7 @@ const AccountCenterPage = () => {
     <GridContent>
       <Row gutter={24}>
         <Col lg={7} md={24}>
-          <Card
-            variant="borderless"
-            style={{ marginBottom: 24 }}
-            loading={loading}
-          >
+          <Card variant="borderless" style={{ marginBottom: 24 }} loading={loading}>
             {!loading && currentUser && (
               <>
                 <div className={styles.avatarHolder}>

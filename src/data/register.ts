@@ -7,6 +7,6 @@ const delay = async (ms = 320) => {
 export const performRegister = async () => {
   await delay();
   return {
-    status: 'ok' as const,
+    status: "ok" as const,
   };
 };

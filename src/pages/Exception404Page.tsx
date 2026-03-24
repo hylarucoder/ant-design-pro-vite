@@ -1,5 +1,5 @@
-import { Button, Card, Result } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Card, Result } from "antd";
+import { Link } from "react-router-dom";
 
 const Exception404Page = () => (
   <Card variant="borderless">

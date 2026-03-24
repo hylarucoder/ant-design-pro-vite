@@ -1,11 +1,11 @@
-import { Column } from '@ant-design/plots';
-import { Button, Card, Col, DatePicker, Row, Tabs } from 'antd';
-import type { RangePickerProps } from 'antd/es/date-picker';
-import numeral from 'numeral';
-import type { DataItem } from '../data.d';
-import useStyles from '../style.style';
+import { Column } from "@ant-design/plots";
+import { Button, Card, Col, DatePicker, Row, Tabs } from "antd";
+import type { RangePickerProps } from "antd/es/date-picker";
+import numeral from "numeral";
+import type { DataItem } from "../data.d";
+import useStyles from "../style.style";
 
-export type TimeType = 'today' | 'week' | 'month' | 'year';
+export type TimeType = "today" | "week" | "month" | "year";
 const { RangePicker } = DatePicker;
 
 const rankingListData: {
@@ -28,11 +28,11 @@ const SalesCard = ({
   loading,
   selectDate,
 }: {
-  rangePickerValue: RangePickerProps['value'];
+  rangePickerValue: RangePickerProps["value"];
   isActive: (key: TimeType) => string;
   salesData: DataItem[];
   loading: boolean;
-  handleRangePickerChange: RangePickerProps['onChange'];
+  handleRangePickerChange: RangePickerProps["onChange"];
   selectDate: (key: TimeType) => void;
 }) => {
   const { styles } = useStyles();
@@ -51,32 +51,16 @@ const SalesCard = ({
         tabBarExtraContent={
           <div className={styles.salesExtraWrap}>
             <div className={styles.salesExtra}>
-              <Button
-                type="text"
-                className={isActive('today')}
-                onClick={() => selectDate('today')}
-              >
+              <Button type="text" className={isActive("today")} onClick={() => selectDate("today")}>
                 今日
               </Button>
-              <Button
-                type="text"
-                className={isActive('week')}
-                onClick={() => selectDate('week')}
-              >
+              <Button type="text" className={isActive("week")} onClick={() => selectDate("week")}>
                 本周
               </Button>
-              <Button
-                type="text"
-                className={isActive('month')}
-                onClick={() => selectDate('month')}
-              >
+              <Button type="text" className={isActive("month")} onClick={() => selectDate("month")}>
                 本月
               </Button>
-              <Button
-                type="text"
-                className={isActive('year')}
-                onClick={() => selectDate('year')}
-              >
+              <Button type="text" className={isActive("year")} onClick={() => selectDate("year")}>
                 本年
               </Button>
             </div>
@@ -96,8 +80,8 @@ const SalesCard = ({
         }}
         items={[
           {
-            key: 'sales',
-            label: '销售额',
+            key: "sales",
+            label: "销售额",
             children: (
               <Row>
                 <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -115,15 +99,15 @@ const SalesCard = ({
                         y: {
                           title: false,
                           gridLineDash: null,
-                          gridStroke: '#ccc',
+                          gridStroke: "#ccc",
                         },
                       }}
                       scale={{
                         x: { paddingInner: 0.4 },
                       }}
                       tooltip={{
-                        name: '销售量',
-                        channel: 'y',
+                        name: "销售量",
+                        channel: "y",
                       }}
                     />
                   </div>
@@ -136,18 +120,15 @@ const SalesCard = ({
                         <li key={item.title}>
                           <span
                             className={`${styles.rankingItemNumber} ${
-                              i < 3 ? styles.rankingItemNumberActive : ''
+                              i < 3 ? styles.rankingItemNumberActive : ""
                             }`}
                           >
                             {i + 1}
                           </span>
-                          <span
-                            className={styles.rankingItemTitle}
-                            title={item.title}
-                          >
+                          <span className={styles.rankingItemTitle} title={item.title}>
                             {item.title}
                           </span>
-                          <span>{numeral(item.total).format('0,0')}</span>
+                          <span>{numeral(item.total).format("0,0")}</span>
                         </li>
                       ))}
                     </ul>
@@ -157,8 +138,8 @@ const SalesCard = ({
             ),
           },
           {
-            key: 'views',
-            label: '访问量',
+            key: "views",
+            label: "访问量",
             children: (
               <Row>
                 <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -181,8 +162,8 @@ const SalesCard = ({
                         x: { paddingInner: 0.4 },
                       }}
                       tooltip={{
-                        name: '访问量',
-                        channel: 'y',
+                        name: "访问量",
+                        channel: "y",
                       }}
                     />
                   </div>
@@ -195,20 +176,15 @@ const SalesCard = ({
                         <li key={item.title}>
                           <span
                             className={`${
-                              i < 3
-                                ? styles.rankingItemNumberActive
-                                : styles.rankingItemNumber
+                              i < 3 ? styles.rankingItemNumberActive : styles.rankingItemNumber
                             }`}
                           >
                             {i + 1}
                           </span>
-                          <span
-                            className={styles.rankingItemTitle}
-                            title={item.title}
-                          >
+                          <span className={styles.rankingItemTitle} title={item.title}>
                             {item.title}
                           </span>
-                          <span>{numeral(item.total).format('0,0')}</span>
+                          <span>{numeral(item.total).format("0,0")}</span>
                         </li>
                       ))}
                     </ul>

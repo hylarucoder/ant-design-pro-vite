@@ -1,35 +1,24 @@
-import {
-  App,
-  Button,
-  Col,
-  Form,
-  Input,
-  Popover,
-  Progress,
-  Row,
-  Select,
-  Space,
-} from 'antd';
-import type { Store } from 'antd/es/form/interface';
-import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useStyles from '@/pages/user/register/styles';
-import { performRegister } from '../data/register';
+import { App, Button, Col, Form, Input, Popover, Progress, Row, Select, Space } from "antd";
+import type { Store } from "antd/es/form/interface";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useStyles from "@/pages/user/register/styles";
+import { performRegister } from "../data/register";
 
 const FormItem = Form.Item;
 const { Option } = Select;
 
 const passwordProgressMap = {
-  ok: 'success',
-  pass: 'normal',
-  poor: 'exception',
+  ok: "success",
+  pass: "normal",
+  poor: "exception",
 } as const;
 
 const RegisterPage = () => {
   const { styles } = useStyles();
   const [count, setCount] = useState(0);
   const [open, setVisible] = useState(false);
-  const [prefix, setPrefix] = useState('86');
+  const [prefix, setPrefix] = useState("86");
   const [popover, setPopover] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const intervalRef = useRef<number | undefined>(undefined);
@@ -38,7 +27,7 @@ const RegisterPage = () => {
   const { message } = App.useApp();
 
   useEffect(() => {
-    document.title = '注册 - Ant Design Pro';
+    document.title = "注册 - Ant Design Pro";
     return () => {
       window.clearInterval(intervalRef.current);
     };
@@ -75,15 +64,15 @@ const RegisterPage = () => {
   };
 
   const getPasswordStatus = () => {
-    const value = form.getFieldValue('password');
-    if (value && value.length > 9) return 'ok';
-    if (value && value.length > 5) return 'pass';
-    return 'poor';
+    const value = form.getFieldValue("password");
+    if (value && value.length > 9) return "ok";
+    if (value && value.length > 5) return "pass";
+    return "poor";
   };
 
   const checkConfirm = (_: unknown, value: string) => {
-    if (value && value !== form.getFieldValue('password')) {
-      return Promise.reject(new Error('两次输入的密码不匹配!'));
+    if (value && value !== form.getFieldValue("password")) {
+      return Promise.reject(new Error("两次输入的密码不匹配!"));
     }
     return Promise.resolve();
   };
@@ -91,25 +80,23 @@ const RegisterPage = () => {
   const checkPassword = (_: unknown, value: string) => {
     if (!value) {
       setVisible(false);
-      return Promise.reject(new Error('请输入密码!'));
+      return Promise.reject(new Error("请输入密码!"));
     }
     if (!open) {
       setVisible(true);
     }
     setPopover(!popover);
     if (value.length < 6) {
-      return Promise.reject(new Error(''));
+      return Promise.reject(new Error(""));
     }
     return Promise.resolve();
   };
 
   const renderPasswordProgress = () => {
-    const value = form.getFieldValue('password');
+    const value = form.getFieldValue("password");
     const passwordStatus = getPasswordStatus();
     return value?.length ? (
-      <div
-        className={styles[`progress-${passwordStatus}` as keyof typeof styles]}
-      >
+      <div className={styles[`progress-${passwordStatus}` as keyof typeof styles]}>
         <Progress
           status={passwordProgressMap[passwordStatus]}
           size={[240, 6]}
@@ -124,10 +111,10 @@ const RegisterPage = () => {
     setSubmitting(true);
     const result = await performRegister();
     setSubmitting(false);
-    if (result.status === 'ok') {
-      message.success('注册成功！');
+    if (result.status === "ok") {
+      message.success("注册成功！");
       navigate(
-        `/user/register-result?account=${encodeURIComponent(String(values.email || 'AntDesign@example.com'))}`,
+        `/user/register-result?account=${encodeURIComponent(String(values.email || "AntDesign@example.com"))}`,
         {
           replace: true,
         },
@@ -148,19 +135,17 @@ const RegisterPage = () => {
         <FormItem
           name="email"
           rules={[
-            { required: true, message: '请输入邮箱地址!' },
-            { type: 'email', message: '邮箱地址格式错误!' },
+            { required: true, message: "请输入邮箱地址!" },
+            { type: "email", message: "邮箱地址格式错误!" },
           ]}
         >
           <Input size="large" placeholder="邮箱" />
         </FormItem>
         <Popover
-          getPopupContainer={(node) =>
-            node?.parentNode ? (node.parentNode as HTMLElement) : node
-          }
+          getPopupContainer={(node) => (node?.parentNode ? (node.parentNode as HTMLElement) : node)}
           content={
             open && (
-              <div style={{ padding: '4px 0' }}>
+              <div style={{ padding: "4px 0" }}>
                 {passwordStatusMap[getPasswordStatus()]}
                 {renderPasswordProgress()}
                 <div style={{ marginTop: 10 }}>
@@ -176,42 +161,30 @@ const RegisterPage = () => {
           <FormItem
             name="password"
             className={
-              form.getFieldValue('password') &&
-              form.getFieldValue('password').length > 0 &&
+              form.getFieldValue("password") &&
+              form.getFieldValue("password").length > 0 &&
               styles.password
             }
             rules={[{ validator: checkPassword }]}
           >
-            <Input
-              size="large"
-              type="password"
-              placeholder="至少6位密码，区分大小写"
-            />
+            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
           </FormItem>
         </Popover>
         <FormItem
           name="confirm"
-          rules={[
-            { required: true, message: '确认密码' },
-            { validator: checkConfirm },
-          ]}
+          rules={[{ required: true, message: "确认密码" }, { validator: checkConfirm }]}
         >
           <Input size="large" type="password" placeholder="确认密码" />
         </FormItem>
         <FormItem
           name="mobile"
           rules={[
-            { required: true, message: '请输入手机号!' },
-            { pattern: /^\d{11}$/, message: '手机号格式错误!' },
+            { required: true, message: "请输入手机号!" },
+            { pattern: /^\d{11}$/, message: "手机号格式错误!" },
           ]}
         >
-          <Space.Compact style={{ width: '100%' }}>
-            <Select
-              size="large"
-              value={prefix}
-              onChange={setPrefix}
-              style={{ width: '30%' }}
-            >
+          <Space.Compact style={{ width: "100%" }}>
+            <Select size="large" value={prefix} onChange={setPrefix} style={{ width: "30%" }}>
               <Option value="86">+86</Option>
               <Option value="87">+87</Option>
             </Select>
@@ -220,10 +193,7 @@ const RegisterPage = () => {
         </FormItem>
         <Row gutter={8}>
           <Col span={16}>
-            <FormItem
-              name="captcha"
-              rules={[{ required: true, message: '请输入验证码!' }]}
-            >
+            <FormItem name="captcha" rules={[{ required: true, message: "请输入验证码!" }]}>
               <Input size="large" placeholder="验证码" />
             </FormItem>
           </Col>
@@ -234,7 +204,7 @@ const RegisterPage = () => {
               className={styles.getCaptcha}
               onClick={onGetCaptcha}
             >
-              {count ? `${count} s` : '获取验证码'}
+              {count ? `${count} s` : "获取验证码"}
             </Button>
           </Col>
         </Row>

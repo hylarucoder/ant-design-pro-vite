@@ -1,11 +1,11 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Area } from '@ant-design/plots';
-import { Card, Col, Row, Table, Tooltip } from 'antd';
-import numeral from 'numeral';
-import React from 'react';
-import type { DataItem } from '../data.d';
-import NumberInfo from './NumberInfo';
-import Trend from './Trend';
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { Area } from "@ant-design/plots";
+import { Card, Col, Row, Table, Tooltip } from "antd";
+import numeral from "numeral";
+import React from "react";
+import type { DataItem } from "../data.d";
+import NumberInfo from "./NumberInfo";
+import Trend from "./Trend";
 
 const TopSearch = ({
   loading,
@@ -20,20 +20,20 @@ const TopSearch = ({
 }) => {
   const columns = [
     {
-      title: '排名',
-      dataIndex: 'index',
-      key: 'index',
+      title: "排名",
+      dataIndex: "index",
+      key: "index",
     },
     {
-      title: '搜索关键词',
-      dataIndex: 'keyword',
-      key: 'keyword',
+      title: "搜索关键词",
+      dataIndex: "keyword",
+      key: "keyword",
       render: (text: React.ReactNode) => <a href="/">{text}</a>,
     },
     {
-      title: '用户数',
-      dataIndex: 'count',
-      key: 'count',
+      title: "用户数",
+      dataIndex: "count",
+      key: "count",
       sorter: (
         a: {
           count: number;
@@ -44,9 +44,9 @@ const TopSearch = ({
       ) => a.count - b.count,
     },
     {
-      title: '周涨幅',
-      dataIndex: 'range',
-      key: 'range',
+      title: "周涨幅",
+      dataIndex: "range",
+      key: "range",
       sorter: (
         a: {
           range: number;
@@ -61,7 +61,7 @@ const TopSearch = ({
           status: number;
         },
       ) => (
-        <Trend flag={record.status === 1 ? 'down' : 'up'}>
+        <Trend flag={record.status === 1 ? "down" : "up"}>
           <span
             style={{
               marginRight: 4,
@@ -80,7 +80,7 @@ const TopSearch = ({
       title="线上热门搜索"
       extra={dropdownGroup}
       style={{
-        height: '100%',
+        height: "100%",
       }}
     >
       <Row gutter={68}>
@@ -105,7 +105,7 @@ const TopSearch = ({
               </span>
             }
             gap={8}
-            total={numeral(12321).format('0,0')}
+            total={numeral(12321).format("0,0")}
             status="up"
             subTotal={17.1}
           />
@@ -117,7 +117,7 @@ const TopSearch = ({
             axis={false}
             padding={-12}
             style={{
-              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fill: "linear-gradient(-90deg, white 0%, #6294FA 100%)",
               fillOpacity: 0.4,
             }}
             data={visitData2}
@@ -155,7 +155,7 @@ const TopSearch = ({
             height={45}
             padding={-12}
             style={{
-              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fill: "linear-gradient(-90deg, white 0%, #6294FA 100%)",
               fillOpacity: 0.4,
             }}
             data={visitData2}

@@ -5,20 +5,12 @@ import {
   ProFormSelect,
   ProFormText,
   StepsForm,
-} from '@ant-design/pro-components';
-import type { FormInstance } from 'antd';
-import {
-  Alert,
-  Button,
-  Card,
-  Descriptions,
-  Divider,
-  Result,
-  Statistic,
-} from 'antd';
-import { useRef, useState } from 'react';
-import type { StepDataType } from '@/pages/form/step-form/data.d';
-import useStyles from '@/pages/form/step-form/style.style';
+} from "@ant-design/pro-components";
+import type { FormInstance } from "antd";
+import { Alert, Button, Card, Descriptions, Divider, Result, Statistic } from "antd";
+import { useRef, useState } from "react";
+import type { StepDataType } from "@/pages/form/step-form/data.d";
+import useStyles from "@/pages/form/step-form/style.style";
 
 const StepDescriptions = ({
   stepData,
@@ -35,11 +27,7 @@ const StepDescriptions = ({
       <Descriptions.Item label="收款账户">{receiverAccount}</Descriptions.Item>
       <Descriptions.Item label="收款人姓名">{receiverName}</Descriptions.Item>
       <Descriptions.Item label="转账金额">
-        <Statistic
-          value={amount}
-          suffix={<span style={{ fontSize: 14 }}>元</span>}
-          precision={2}
-        />
+        <Statistic value={amount} suffix={<span style={{ fontSize: 14 }}>元</span>} precision={2} />
       </Descriptions.Item>
     </Descriptions>
   );
@@ -77,11 +65,11 @@ const StepResult = ({
 const StepFormPage = () => {
   const { styles } = useStyles();
   const [stepData, setStepData] = useState<StepDataType>({
-    payAccount: 'ant-design@alipay.com',
-    receiverAccount: 'test@example.com',
-    receiverName: 'Alex',
-    amount: '500',
-    receiverMode: 'alipay',
+    payAccount: "ant-design@alipay.com",
+    receiverAccount: "test@example.com",
+    receiverName: "Alex",
+    amount: "500",
+    receiverMode: "alipay",
   });
   const [current, setCurrent] = useState(0);
   const formRef = useRef<FormInstance>(null);
@@ -114,20 +102,20 @@ const StepFormPage = () => {
               label="付款账户"
               width="md"
               name="payAccount"
-              rules={[{ required: true, message: '请选择付款账户' }]}
-              valueEnum={{ 'ant-design@alipay.com': 'ant-design@alipay.com' }}
+              rules={[{ required: true, message: "请选择付款账户" }]}
+              valueEnum={{ "ant-design@alipay.com": "ant-design@alipay.com" }}
             />
             <ProForm.Group title="收款账户" size={8}>
               <ProFormSelect
                 name="receiverMode"
-                rules={[{ required: true, message: '请选择付款账户' }]}
-                valueEnum={{ alipay: '支付宝', bank: '银行账户' }}
+                rules={[{ required: true, message: "请选择付款账户" }]}
+                valueEnum={{ alipay: "支付宝", bank: "银行账户" }}
               />
               <ProFormText
                 name="receiverAccount"
                 rules={[
-                  { required: true, message: '请输入收款人账户' },
-                  { type: 'email', message: '账户名应为邮箱格式' },
+                  { required: true, message: "请输入收款人账户" },
+                  { type: "email", message: "账户名应为邮箱格式" },
                 ]}
                 placeholder="test@example.com"
               />
@@ -136,7 +124,7 @@ const StepFormPage = () => {
               label="收款人姓名"
               width="md"
               name="receiverName"
-              rules={[{ required: true, message: '请输入收款人姓名' }]}
+              rules={[{ required: true, message: "请输入收款人姓名" }]}
               placeholder="请输入收款人姓名"
             />
             <ProFormDigit
@@ -144,14 +132,14 @@ const StepFormPage = () => {
               name="amount"
               width="md"
               rules={[
-                { required: true, message: '请输入转账金额' },
+                { required: true, message: "请输入转账金额" },
                 {
                   pattern: /^(\d+)((?:\.\d+)?)$/,
-                  message: '请输入合法金额数字',
+                  message: "请输入合法金额数字",
                 },
               ]}
               placeholder="请输入金额"
-              fieldProps={{ prefix: '￥' }}
+              fieldProps={{ prefix: "￥" }}
             />
           </StepsForm.StepForm>
           <StepsForm.StepForm title="确认转账信息">
@@ -163,15 +151,13 @@ const StepFormPage = () => {
                 style={{ marginBottom: 24 }}
               />
               <StepDescriptions stepData={stepData} bordered />
-              <Divider style={{ margin: '24px 0' }} />
+              <Divider style={{ margin: "24px 0" }} />
               <ProFormText.Password
                 label="支付密码"
                 width="md"
                 name="password"
                 required={false}
-                rules={[
-                  { required: true, message: '需要支付密码才能进行支付' },
-                ]}
+                rules={[{ required: true, message: "需要支付密码才能进行支付" }]}
               />
             </div>
           </StepsForm.StepForm>
@@ -186,7 +172,7 @@ const StepFormPage = () => {
             </StepResult>
           </StepsForm.StepForm>
         </StepsForm>
-        <Divider style={{ margin: '40px 0 24px' }} />
+        <Divider style={{ margin: "40px 0 24px" }} />
         <div>
           <h3>说明</h3>
           <h4>转账到支付宝账户</h4>

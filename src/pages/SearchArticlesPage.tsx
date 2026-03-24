@@ -1,19 +1,14 @@
-import {
-  LikeOutlined,
-  LoadingOutlined,
-  MessageOutlined,
-  StarOutlined,
-} from '@ant-design/icons';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import type { DefaultOptionType } from 'antd/es/select';
-import { useEffect, useMemo, useState } from 'react';
-import { categoryOptions } from '@/pages/list/mock';
-import ArticleListContent from '@/pages/list/search/articles/components/ArticleListContent';
-import StandardFormRow from '@/pages/list/search/articles/components/StandardFormRow';
-import TagSelect from '@/pages/list/search/articles/components/TagSelect';
-import type { ListItemDataType } from '@/pages/list/search/articles/data.d';
-import useStyles from '@/pages/list/search/articles/style.style';
-import { loadSearchItems } from '../data/demoList';
+import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Form, List, Row, Select, Tag } from "antd";
+import type { DefaultOptionType } from "antd/es/select";
+import { useEffect, useMemo, useState } from "react";
+import { categoryOptions } from "@/pages/list/mock";
+import ArticleListContent from "@/pages/list/search/articles/components/ArticleListContent";
+import StandardFormRow from "@/pages/list/search/articles/components/StandardFormRow";
+import TagSelect from "@/pages/list/search/articles/components/TagSelect";
+import type { ListItemDataType } from "@/pages/list/search/articles/data.d";
+import useStyles from "@/pages/list/search/articles/style.style";
+import { loadSearchItems } from "../data/demoList";
 
 const FormItem = Form.Item;
 const pageSize = 5;
@@ -27,7 +22,7 @@ const SearchArticlesPage = () => {
 
   const reload = async () => {
     setLoading(true);
-    const result = await loadSearchItems(pageSize, 'article-search');
+    const result = await loadSearchItems(pageSize, "article-search");
     setList(result.list);
     setLoading(false);
   };
@@ -37,11 +32,11 @@ const SearchArticlesPage = () => {
   }, []);
 
   const owners = [
-    { id: 'wzj', name: '我自己' },
-    { id: 'wjh', name: '吴家豪' },
-    { id: 'zxx', name: '周星星' },
-    { id: 'zly', name: '赵丽颖' },
-    { id: 'ym', name: '姚明' },
+    { id: "wzj", name: "我自己" },
+    { id: "wjh", name: "吴家豪" },
+    { id: "zxx", name: "周星星" },
+    { id: "zly", name: "赵丽颖" },
+    { id: "ym", name: "姚明" },
   ];
 
   const ownerOptions = useMemo<DefaultOptionType[]>(
@@ -51,41 +46,32 @@ const SearchArticlesPage = () => {
 
   const loadMore = async () => {
     setLoadingMore(true);
-    const result = await loadSearchItems(
-      pageSize,
-      `article-search-more-${list.length}`,
-    );
+    const result = await loadSearchItems(pageSize, `article-search-more-${list.length}`);
     setList((current) => [...current, ...result.list]);
     setLoadingMore(false);
   };
 
   const setOwner = () => {
-    form.setFieldsValue({ owner: ['wzj'] });
+    form.setFieldsValue({ owner: ["wzj"] });
   };
 
-  const IconText = ({
-    type,
-    text,
-  }: {
-    type: string;
-    text: React.ReactNode;
-  }) => {
+  const IconText = ({ type, text }: { type: string; text: React.ReactNode }) => {
     switch (type) {
-      case 'star-o':
+      case "star-o":
         return (
           <span>
             <StarOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
         );
-      case 'like-o':
+      case "like-o":
         return (
           <span>
             <LikeOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
         );
-      case 'message':
+      case "message":
         return (
           <span>
             <MessageOutlined style={{ marginRight: 8 }} />
@@ -98,17 +84,14 @@ const SearchArticlesPage = () => {
   };
 
   const loadMoreDom = list.length > 0 && (
-    <div style={{ textAlign: 'center', marginTop: 16 }}>
-      <Button
-        onClick={() => void loadMore()}
-        style={{ paddingLeft: 48, paddingRight: 48 }}
-      >
+    <div style={{ textAlign: "center", marginTop: 16 }}>
+      <Button onClick={() => void loadMore()} style={{ paddingLeft: 48, paddingRight: 48 }}>
         {loadingMore ? (
           <span>
             <LoadingOutlined /> 加载中...
           </span>
         ) : (
-          '加载更多'
+          "加载更多"
         )}
       </Button>
     </div>
@@ -120,7 +103,7 @@ const SearchArticlesPage = () => {
         <Form
           layout="inline"
           form={form}
-          initialValues={{ owner: ['wjh', 'zxx'] }}
+          initialValues={{ owner: ["wjh", "zxx"] }}
           onValuesChange={() => {
             void reload();
           }}
@@ -130,16 +113,11 @@ const SearchArticlesPage = () => {
               <TagSelect expandable>
                 {categoryOptions
                   .filter(
-                    (
-                      category,
-                    ): category is { value: string | number; label: string } =>
+                    (category): category is { value: string | number; label: string } =>
                       category.value !== undefined && category.value !== null,
                   )
                   .map((category) => (
-                    <TagSelect.Option
-                      value={category.value}
-                      key={category.value}
-                    >
+                    <TagSelect.Option value={category.value} key={category.value}>
                       {category.label}
                     </TagSelect.Option>
                   ))}
@@ -151,7 +129,7 @@ const SearchArticlesPage = () => {
               <Select
                 mode="multiple"
                 placeholder="选择 owner"
-                style={{ minWidth: '6rem' }}
+                style={{ minWidth: "6rem" }}
                 options={ownerOptions}
               />
             </FormItem>
@@ -173,8 +151,8 @@ const SearchArticlesPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
-                    options={[{ label: '李三', value: 'lisa' }]}
+                    style={{ maxWidth: 200, width: "100%" }}
+                    options={[{ label: "李三", value: "lisa" }]}
                   />
                 </FormItem>
               </Col>
@@ -190,8 +168,8 @@ const SearchArticlesPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
-                    options={[{ label: '优秀', value: 'good' }]}
+                    style={{ maxWidth: 200, width: "100%" }}
+                    options={[{ label: "优秀", value: "good" }]}
                   />
                 </FormItem>
               </Col>
@@ -202,7 +180,7 @@ const SearchArticlesPage = () => {
       <Card
         style={{ marginTop: 24 }}
         variant="borderless"
-        styles={{ body: { padding: '8px 32px 32px 32px' } }}
+        styles={{ body: { padding: "8px 32px 32px 32px" } }}
       >
         <List<ListItemDataType>
           size="large"

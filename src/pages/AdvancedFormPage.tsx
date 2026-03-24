@@ -1,5 +1,5 @@
-import { CloseCircleOutlined } from '@ant-design/icons';
-import type { ProColumnType } from '@ant-design/pro-components';
+import { CloseCircleOutlined } from "@ant-design/icons";
+import type { ProColumnType } from "@ant-design/pro-components";
 import {
   EditableProTable,
   FooterToolbar,
@@ -9,11 +9,11 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTimePicker,
-} from '@ant-design/pro-components';
-import { App, Card, Col, Popover, Row } from 'antd';
-import { useState } from 'react';
-import useStyles from '@/pages/form/advanced-form/style.style';
-import { submitDemoForm } from '../data/forms';
+} from "@ant-design/pro-components";
+import { App, Card, Col, Popover, Row } from "antd";
+import { useState } from "react";
+import useStyles from "@/pages/form/advanced-form/style.style";
+import { submitDemoForm } from "../data/forms";
 
 interface TableFormDateType {
   key: string;
@@ -25,38 +25,38 @@ interface TableFormDateType {
 type InternalNamePath = (string | number)[];
 
 const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
+  name: "仓库名",
+  url: "仓库域名",
+  owner: "仓库管理员",
+  approver: "审批人",
+  dateRange: "生效日期",
+  type: "仓库类型",
+  name2: "任务名",
+  url2: "任务描述",
+  owner2: "执行人",
+  approver2: "责任人",
+  dateRange2: "生效日期",
+  type2: "任务类型",
 };
 
 const tableData = [
   {
-    key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
+    key: "1",
+    workId: "00001",
+    name: "John Brown",
+    department: "New York No. 1 Lake Park",
   },
   {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
+    key: "2",
+    workId: "00002",
+    name: "Jim Green",
+    department: "London No. 1 Lake Park",
   },
   {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
+    key: "3",
+    workId: "00003",
+    name: "Joe Black",
+    department: "Sidney No. 1 Lake Park",
   },
 ];
 
@@ -116,18 +116,18 @@ const AdvancedFormPage = () => {
   };
 
   const columns: ProColumnType<TableFormDateType>[] = [
-    { title: '成员姓名', dataIndex: 'name', key: 'name', width: '20%' },
-    { title: '工号', dataIndex: 'workId', key: 'workId', width: '20%' },
+    { title: "成员姓名", dataIndex: "name", key: "name", width: "20%" },
+    { title: "工号", dataIndex: "workId", key: "workId", width: "20%" },
     {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
+      title: "所属部门",
+      dataIndex: "department",
+      key: "department",
+      width: "40%",
     },
     {
-      title: '操作',
-      key: 'action',
-      valueType: 'option',
+      title: "操作",
+      key: "action",
+      valueType: "option",
       render: (_, record, __, action) => [
         <a
           key="edit"
@@ -157,7 +157,7 @@ const AdvancedFormPage = () => {
       onFinish={async (values) => {
         setError([]);
         await submitDemoForm(values);
-        message.success('提交成功');
+        message.success("提交成功");
       }}
       onFinishFailed={(errorInfo) => {
         setError(errorInfo.errorFields);
@@ -170,37 +170,27 @@ const AdvancedFormPage = () => {
               <ProFormText
                 label={fieldLabels.name}
                 name="name"
-                rules={[{ required: true, message: '请输入仓库名称' }]}
+                rules={[{ required: true, message: "请输入仓库名称" }]}
                 placeholder="请输入仓库名称"
               />
             </Col>
-            <Col
-              xl={{ span: 6, offset: 2 }}
-              lg={{ span: 8 }}
-              md={{ span: 12 }}
-              sm={24}
-            >
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormText
                 label={fieldLabels.url}
                 name="url"
-                rules={[{ required: true, message: '请选择' }]}
-                fieldProps={{ style: { width: '100%' } }}
+                rules={[{ required: true, message: "请选择" }]}
+                fieldProps={{ style: { width: "100%" } }}
                 placeholder="例如：example.com"
               />
             </Col>
-            <Col
-              xl={{ span: 8, offset: 2 }}
-              lg={{ span: 10 }}
-              md={{ span: 24 }}
-              sm={24}
-            >
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
                 label={fieldLabels.owner}
                 name="owner"
-                rules={[{ required: true, message: '请选择管理员' }]}
+                rules={[{ required: true, message: "请选择管理员" }]}
                 options={[
-                  { label: '付晓晓', value: 'xiao' },
-                  { label: '周毛毛', value: 'mao' },
+                  { label: "付晓晓", value: "xiao" },
+                  { label: "周毛毛", value: "mao" },
                 ]}
                 placeholder="请选择管理员"
               />
@@ -211,40 +201,30 @@ const AdvancedFormPage = () => {
               <ProFormSelect
                 label={fieldLabels.approver}
                 name="approver"
-                rules={[{ required: true, message: '请选择审批员' }]}
+                rules={[{ required: true, message: "请选择审批员" }]}
                 options={[
-                  { label: '付晓晓', value: 'xiao' },
-                  { label: '周毛毛', value: 'mao' },
+                  { label: "付晓晓", value: "xiao" },
+                  { label: "周毛毛", value: "mao" },
                 ]}
                 placeholder="请选择审批员"
               />
             </Col>
-            <Col
-              xl={{ span: 6, offset: 2 }}
-              lg={{ span: 8 }}
-              md={{ span: 12 }}
-              sm={24}
-            >
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormDateRangePicker
                 label={fieldLabels.dateRange}
                 name="dateRange"
-                fieldProps={{ style: { width: '100%' } }}
-                rules={[{ required: true, message: '请选择生效日期' }]}
+                fieldProps={{ style: { width: "100%" } }}
+                rules={[{ required: true, message: "请选择生效日期" }]}
               />
             </Col>
-            <Col
-              xl={{ span: 8, offset: 2 }}
-              lg={{ span: 10 }}
-              md={{ span: 24 }}
-              sm={24}
-            >
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
                 label={fieldLabels.type}
                 name="type"
-                rules={[{ required: true, message: '请选择仓库类型' }]}
+                rules={[{ required: true, message: "请选择仓库类型" }]}
                 options={[
-                  { label: '私密', value: 'private' },
-                  { label: '公开', value: 'public' },
+                  { label: "私密", value: "private" },
+                  { label: "公开", value: "public" },
                 ]}
                 placeholder="请选择仓库类型"
               />
@@ -257,34 +237,24 @@ const AdvancedFormPage = () => {
               <ProFormText
                 label={fieldLabels.name2}
                 name="name2"
-                rules={[{ required: true, message: '请输入' }]}
+                rules={[{ required: true, message: "请输入" }]}
               />
             </Col>
-            <Col
-              xl={{ span: 6, offset: 2 }}
-              lg={{ span: 8 }}
-              md={{ span: 12 }}
-              sm={24}
-            >
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormText
                 label={fieldLabels.url2}
                 name="url2"
-                rules={[{ required: true, message: '请选择' }]}
+                rules={[{ required: true, message: "请选择" }]}
               />
             </Col>
-            <Col
-              xl={{ span: 8, offset: 2 }}
-              lg={{ span: 10 }}
-              md={{ span: 24 }}
-              sm={24}
-            >
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
                 label={fieldLabels.owner2}
                 name="owner2"
-                rules={[{ required: true, message: '请选择管理员' }]}
+                rules={[{ required: true, message: "请选择管理员" }]}
                 options={[
-                  { label: '付晓晓', value: 'xiao' },
-                  { label: '周毛毛', value: 'mao' },
+                  { label: "付晓晓", value: "xiao" },
+                  { label: "周毛毛", value: "mao" },
                 ]}
               />
             </Col>
@@ -294,41 +264,31 @@ const AdvancedFormPage = () => {
               <ProFormSelect
                 label={fieldLabels.approver2}
                 name="approver2"
-                rules={[{ required: true, message: '请选择审批员' }]}
+                rules={[{ required: true, message: "请选择审批员" }]}
                 options={[
-                  { label: '付晓晓', value: 'xiao' },
-                  { label: '周毛毛', value: 'mao' },
+                  { label: "付晓晓", value: "xiao" },
+                  { label: "周毛毛", value: "mao" },
                 ]}
                 placeholder="请选择审批员"
               />
             </Col>
-            <Col
-              xl={{ span: 6, offset: 2 }}
-              lg={{ span: 8 }}
-              md={{ span: 12 }}
-              sm={24}
-            >
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormTimePicker
                 label={fieldLabels.dateRange2}
                 name="dateRange2"
-                rules={[{ required: true, message: '请输入' }]}
+                rules={[{ required: true, message: "请输入" }]}
                 placeholder="提醒时间"
-                fieldProps={{ style: { width: '100%' } }}
+                fieldProps={{ style: { width: "100%" } }}
               />
             </Col>
-            <Col
-              xl={{ span: 8, offset: 2 }}
-              lg={{ span: 10 }}
-              md={{ span: 24 }}
-              sm={24}
-            >
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
                 label={fieldLabels.type2}
                 name="type2"
-                rules={[{ required: true, message: '请选择仓库类型' }]}
+                rules={[{ required: true, message: "请选择仓库类型" }]}
                 options={[
-                  { label: '私密', value: 'private' },
-                  { label: '公开', value: 'public' },
+                  { label: "私密", value: "private" },
+                  { label: "公开", value: "public" },
                 ]}
                 placeholder="请选择仓库类型"
               />

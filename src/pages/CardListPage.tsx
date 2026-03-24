@@ -1,10 +1,10 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, List, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import type { CardListItemDataType } from '@/pages/list/card-list/data.d';
-import useStyles from '@/pages/list/card-list/style.style';
-import { loadCardList } from '../data/demoList';
+import { PlusOutlined } from "@ant-design/icons";
+import { PageContainer } from "@ant-design/pro-components";
+import { Button, Card, List, Typography } from "antd";
+import { useEffect, useState } from "react";
+import type { CardListItemDataType } from "@/pages/list/card-list/data.d";
+import useStyles from "@/pages/list/card-list/style.style";
+import { loadCardList } from "../data/demoList";
 
 const { Paragraph } = Typography;
 
@@ -30,24 +30,15 @@ const CardListPage = () => {
       </p>
       <div className={styles.contentLink}>
         <a>
-          <img
-            alt=""
-            src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-          />{' '}
+          <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" />{" "}
           快速开始
         </a>
         <a>
-          <img
-            alt=""
-            src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-          />{' '}
+          <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" />{" "}
           产品简介
         </a>
         <a>
-          <img
-            alt=""
-            src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-          />{' '}
+          <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" />{" "}
           产品文档
         </a>
       </div>
@@ -78,25 +69,13 @@ const CardListPage = () => {
                   <Card
                     hoverable
                     className={styles.card}
-                    actions={[
-                      <a key="option1">操作一</a>,
-                      <a key="option2">操作二</a>,
-                    ]}
+                    actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
                   >
                     <Card.Meta
-                      avatar={
-                        <img
-                          alt=""
-                          className={styles.cardAvatar}
-                          src={item.avatar}
-                        />
-                      }
+                      avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                       title={<a>{item.title}</a>}
                       description={
-                        <Paragraph
-                          className={styles.item}
-                          ellipsis={{ rows: 3 }}
-                        >
+                        <Paragraph className={styles.item} ellipsis={{ rows: 3 }}>
                           {item.description}
                         </Paragraph>
                       }

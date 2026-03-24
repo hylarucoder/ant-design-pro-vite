@@ -1,18 +1,18 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from "antd-style";
 
 const useStyles = createStyles(({ token }) => {
   return {
     trendItem: {
-      display: 'inline-block',
+      display: "inline-block",
       fontSize: token.fontSize,
-      lineHeight: '22px',
+      lineHeight: "22px",
     },
     up: {
-      color: token['red-6'],
+      color: token["red-6"],
     },
     down: {
-      top: '-1px',
-      color: token['green-6'],
+      top: "-1px",
+      color: token["green-6"],
     },
     trendItemGrey: {
       up: {
@@ -23,8 +23,8 @@ const useStyles = createStyles(({ token }) => {
       },
     },
     reverseColor: {
-      up: { color: token['green-6'] },
-      down: { color: token['red-6'] },
+      up: { color: token["green-6"] },
+      down: { color: token["red-6"] },
     },
   };
 });

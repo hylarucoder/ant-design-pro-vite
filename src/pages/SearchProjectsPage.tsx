@@ -1,14 +1,14 @@
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { useEffect, useState } from 'react';
-import { categoryOptions } from '@/pages/list/mock';
-import AvatarList from '@/pages/list/search/projects/components/AvatarList';
-import StandardFormRow from '@/pages/list/search/projects/components/StandardFormRow';
-import TagSelect from '@/pages/list/search/projects/components/TagSelect';
-import type { ListItemDataType } from '@/pages/list/search/projects/data.d';
-import useStyles from '@/pages/list/search/projects/style.style';
-import { loadSearchItems } from '../data/demoList';
+import { Card, Col, Form, List, Row, Select, Typography } from "antd";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useEffect, useState } from "react";
+import { categoryOptions } from "@/pages/list/mock";
+import AvatarList from "@/pages/list/search/projects/components/AvatarList";
+import StandardFormRow from "@/pages/list/search/projects/components/StandardFormRow";
+import TagSelect from "@/pages/list/search/projects/components/TagSelect";
+import type { ListItemDataType } from "@/pages/list/search/projects/data.d";
+import useStyles from "@/pages/list/search/projects/style.style";
+import { loadSearchItems } from "../data/demoList";
 
 dayjs.extend(relativeTime);
 
@@ -22,7 +22,7 @@ const SearchProjectsPage = () => {
 
   const reload = async () => {
     setLoading(true);
-    const result = await loadSearchItems(8, 'project-search');
+    const result = await loadSearchItems(8, "project-search");
     setList(result.list);
     setLoading(false);
   };
@@ -45,16 +45,11 @@ const SearchProjectsPage = () => {
               <TagSelect expandable>
                 {categoryOptions
                   .filter(
-                    (
-                      category,
-                    ): category is { value: string | number; label: string } =>
+                    (category): category is { value: string | number; label: string } =>
                       category.value !== undefined && category.value !== null,
                   )
                   .map((category) => (
-                    <TagSelect.Option
-                      value={category.value}
-                      key={category.value}
-                    >
+                    <TagSelect.Option value={category.value} key={category.value}>
                       {category.label}
                     </TagSelect.Option>
                   ))}
@@ -71,8 +66,8 @@ const SearchProjectsPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
-                    options={[{ label: '王昭君', value: 'lisa' }]}
+                    style={{ maxWidth: 200, width: "100%" }}
+                    options={[{ label: "王昭君", value: "lisa" }]}
                   />
                 </FormItem>
               </Col>
@@ -84,10 +79,10 @@ const SearchProjectsPage = () => {
                 >
                   <Select
                     placeholder="不限"
-                    style={{ maxWidth: 200, width: '100%' }}
+                    style={{ maxWidth: 200, width: "100%" }}
                     options={[
-                      { label: '优秀', value: 'good' },
-                      { label: '普通', value: 'normal' },
+                      { label: "优秀", value: "good" },
+                      { label: "普通", value: "normal" },
                     ]}
                   />
                 </FormItem>
@@ -111,22 +106,14 @@ const SearchProjectsPage = () => {
               >
                 <Card.Meta
                   title={<a>{item.title}</a>}
-                  description={
-                    <Paragraph ellipsis={{ rows: 2 }}>
-                      {item.subDescription}
-                    </Paragraph>
-                  }
+                  description={<Paragraph ellipsis={{ rows: 2 }}>{item.subDescription}</Paragraph>}
                 />
                 <div className={styles.cardItemContent}>
                   <span>{dayjs(item.updatedAt).fromNow()}</span>
                   <div className={styles.avatarList}>
                     <AvatarList size="small">
                       {item.members.map((member) => (
-                        <AvatarList.Item
-                          key={member.id}
-                          src={member.avatar}
-                          tips={member.name}
-                        />
+                        <AvatarList.Item key={member.id} src={member.avatar} tips={member.name} />
                       ))}
                     </AvatarList>
                   </div>

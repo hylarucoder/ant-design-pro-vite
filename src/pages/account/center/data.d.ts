@@ -1,4 +1,4 @@
-export type tabKeyType = 'articles' | 'applications' | 'projects';
+export type tabKeyType = "articles" | "applications" | "projects";
 export interface TagType {
   key: string;
   label: string;
@@ -56,7 +56,7 @@ export type ListItemDataType = {
   title: string;
   avatar: string;
   cover: string;
-  status: 'normal' | 'exception' | 'active' | 'success';
+  status: "normal" | "exception" | "active" | "success";
   percent: number;
   logo: string;
   href: string;

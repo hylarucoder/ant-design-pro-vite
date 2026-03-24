@@ -1,4 +1,4 @@
-import type { TagType } from '@/pages/dashboard/monitor/data';
+import type { TagType } from "@/pages/dashboard/monitor/data";
 
 const delay = async (ms = 240) => {
   await new Promise((resolve) => {

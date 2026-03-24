@@ -5,27 +5,27 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "repository": "git@github.com:ant-design/ant-design-pro.git",
   "scripts": {
-    "biome:lint": "npx @biomejs/biome lint",
     "build": "vite build",
     "deploy": "pnpm build && pnpm gh-pages",
     "dev": "vite --host 0.0.0.0 --port 8000",
+    "format": "oxfmt -c .oxfmtrc.json .",
+    "format:check": "oxfmt -c .oxfmtrc.json --check .",
     "gh-pages": "gh-pages -d dist",
-    "jest": "jest",
-    "lint": "pnpm biome:lint && pnpm typecheck",
+    "lint": "pnpm format:check && pnpm oxlint && pnpm typecheck",
+    "lint:fix": "pnpm format && pnpm oxlint:fix",
     "lint-staged": "lint-staged",
+    "oxlint": "oxlint -c .oxlintrc.json .",
+    "oxlint:fix": "oxlint -c .oxlintrc.json . --fix",
     "prepare": "husky",
     "preview": "vite preview --host 0.0.0.0 --port 8000",
     "serve": "vite preview --host 0.0.0.0 --port 8000",
     "start": "vite --host 0.0.0.0 --port 8000",
-    "test": "jest --passWithNoTests",
-    "test:coverage": "pnpm jest --passWithNoTests --coverage",
-    "test:update": "pnpm jest --passWithNoTests -u",
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --passWithNoTests --coverage",
+    "test:update": "vitest run --passWithNoTests -u",
     "tsc": "pnpm typecheck",
     "typecheck": "tsc --noEmit -p tsconfig.vite.json"
   },
-  "browserslist": [
-    "defaults"
-  ],
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "@ant-design/plots": "^2.6.0",
@@ -44,27 +44,31 @@
     "react-router-dom": "^7.13.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.6",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
-    "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.10",
     "@types/node": "^25.5.0",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.1",
     "gh-pages": "^6.1.1",
     "husky": "^9.1.7",
-    "jest": "^30.0.4",
-    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^29.0.1",
     "less": "^4.6.4",
     "lint-staged": "^16.1.2",
+    "oxfmt": "^0.42.0",
+    "oxlint": "^1.57.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
-    "vite": "^8.0.2"
+    "vite": "^8.0.2",
+    "vitest": "^4.1.1"
   },
+  "browserslist": [
+    "defaults"
+  ],
   "engines": {
     "node": ">=20.0.0"
   }

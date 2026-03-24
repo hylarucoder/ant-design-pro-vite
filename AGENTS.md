@@ -23,14 +23,14 @@ Use `pnpm` throughout.
 - `pnpm build`: create a production build in `dist/`.
 - `pnpm preview`: preview the built app locally.
 - `pnpm typecheck`: run TypeScript checks with `tsconfig.vite.json`.
-- `pnpm lint`: run Biome linting plus type checking.
-- `pnpm test`: run Jest; it currently passes when no tests are present.
+- `pnpm lint`: run `oxfmt`, `oxlint`, and type checking.
+- `pnpm test`: run Vitest in jsdom mode; it currently passes when no tests are present.
 
 Before opening a PR, run at least `pnpm typecheck` and `pnpm build`.
 
 ## Coding Style & Naming Conventions
 
-Use TypeScript and React function components. Follow Biome formatting:
+Use TypeScript and React function components. Follow the repository formatter and linter setup:
 
 - spaces for indentation
 - single quotes in JS/TS
@@ -40,7 +40,7 @@ Name pages and components in `PascalCase` like `AnalysisPage.tsx`. Keep helpers 
 
 ## Testing Guidelines
 
-Jest is configured with `jsdom`. Place tests as `*.test.tsx` next to the file they cover, or under a nearby feature folder. Favor focused interaction tests for routing, login flow, and page rendering. If you add a new page or guard, add or update a test for the main user path.
+Vitest is configured with `jsdom`. Place tests as `*.test.tsx` next to the file they cover, or under a nearby feature folder. Favor focused interaction tests for routing, login flow, and page rendering. If you add a new page or guard, add or update a test for the main user path.
 
 ## Commit & Pull Request Guidelines
 

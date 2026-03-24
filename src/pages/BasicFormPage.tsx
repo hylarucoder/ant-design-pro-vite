@@ -8,10 +8,10 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { App, Card } from 'antd';
-import useStyles from '@/pages/form/basic-form/style.style';
-import { submitDemoForm } from '../data/forms';
+} from "@ant-design/pro-components";
+import { App, Card } from "antd";
+import useStyles from "@/pages/form/basic-form/style.style";
+import { submitDemoForm } from "../data/forms";
 
 const BasicFormPage = () => {
   const { styles } = useStyles();
@@ -22,41 +22,41 @@ const BasicFormPage = () => {
       <Card variant="borderless">
         <ProForm
           hideRequiredMark
-          style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}
+          style={{ margin: "auto", marginTop: 8, maxWidth: 600 }}
           name="basic"
           layout="vertical"
-          initialValues={{ public: '1' }}
+          initialValues={{ public: "1" }}
           onFinish={async (values) => {
             await submitDemoForm(values);
-            message.success('提交成功');
+            message.success("提交成功");
           }}
         >
           <ProFormText
             width="md"
             label="标题"
             name="title"
-            rules={[{ required: true, message: '请输入标题' }]}
+            rules={[{ required: true, message: "请输入标题" }]}
             placeholder="给目标起个名字"
           />
           <ProFormDateRangePicker
             label="起止日期"
             width="md"
             name="date"
-            rules={[{ required: true, message: '请选择起止日期' }]}
-            placeholder={['开始日期', '结束日期']}
+            rules={[{ required: true, message: "请选择起止日期" }]}
+            placeholder={["开始日期", "结束日期"]}
           />
           <ProFormTextArea
             label="目标描述"
             width="xl"
             name="goal"
-            rules={[{ required: true, message: '请输入目标描述' }]}
+            rules={[{ required: true, message: "请输入目标描述" }]}
             placeholder="请输入你的阶段性工作目标"
           />
           <ProFormTextArea
             label="衡量标准"
             name="standard"
             width="xl"
-            rules={[{ required: true, message: '请输入衡量标准' }]}
+            rules={[{ required: true, message: "请输入衡量标准" }]}
             placeholder="请输入衡量标准"
           />
           <ProFormText
@@ -93,35 +93,34 @@ const BasicFormPage = () => {
             width="xs"
             fieldProps={{
               formatter: (value) => `${value || 0}%`,
-              parser: (value) => Number(value ? value.replace('%', '') : '0'),
+              parser: (value) => Number(value ? value.replace("%", "") : "0"),
             }}
           />
           <ProFormRadio.Group
             options={[
-              { value: '1', label: '公开' },
-              { value: '2', label: '部分公开' },
-              { value: '3', label: '不公开' },
+              { value: "1", label: "公开" },
+              { value: "2", label: "部分公开" },
+              { value: "3", label: "不公开" },
             ]}
             label="目标公开"
             help="客户、邀评人默认被分享"
             name="publicType"
           />
-          <ProFormDependency name={['publicType']}>
+          <ProFormDependency name={["publicType"]}>
             {({ publicType }) => (
               <ProFormSelect
                 width="md"
                 name="publicUsers"
                 fieldProps={{
                   style: {
-                    margin: '8px 0',
-                    display:
-                      publicType && publicType === '2' ? 'block' : 'none',
+                    margin: "8px 0",
+                    display: publicType && publicType === "2" ? "block" : "none",
                   },
                 }}
                 options={[
-                  { value: '1', label: '同事甲' },
-                  { value: '2', label: '同事乙' },
-                  { value: '3', label: '同事丙' },
+                  { value: "1", label: "同事甲" },
+                  { value: "2", label: "同事乙" },
+                  { value: "3", label: "同事丙" },
                 ]}
               />
             )}

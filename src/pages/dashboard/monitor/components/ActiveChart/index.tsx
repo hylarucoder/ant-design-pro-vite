@@ -1,7 +1,7 @@
-import { Area } from '@ant-design/plots';
-import { Statistic } from 'antd';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import useStyles from './index.style';
+import { Area } from "@ant-design/plots";
+import { Statistic } from "antd";
+import { useCallback, useEffect, useRef, useState } from "react";
+import useStyles from "./index.style";
 
 function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
@@ -56,7 +56,7 @@ const ActiveChart = () => {
           yField="y"
           height={84}
           style={{
-            fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+            fill: "linear-gradient(-90deg, white 0%, #6294FA 100%)",
             fillOpacity: 0.6,
           }}
           data={activeData}
@@ -66,10 +66,7 @@ const ActiveChart = () => {
         <div>
           <div className={styles.activeChartGrid}>
             <p>{[...activeData].sort()[activeData.length - 1]?.y + 200} 亿元</p>
-            <p>
-              {[...activeData].sort()[Math.floor(activeData.length / 2)]?.y}{' '}
-              亿元
-            </p>
+            <p>{[...activeData].sort()[Math.floor(activeData.length / 2)]?.y} 亿元</p>
           </div>
           <div className={styles.dashedLine}>
             <div className={styles.line} />

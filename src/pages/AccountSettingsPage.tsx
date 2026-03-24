@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from "@ant-design/icons";
 import {
   GridContent,
   ProForm,
@@ -7,30 +7,22 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { App, Button, Input, Menu, Upload } from 'antd';
-import { useLayoutEffect, useRef, useState } from 'react';
-import BindingView from '@/pages/account/settings/components/binding';
-import useBaseComponentStyles from '@/pages/account/settings/components/index.style';
-import NotificationView from '@/pages/account/settings/components/notification';
-import SecurityView from '@/pages/account/settings/components/security';
-import type { CurrentUser } from '@/pages/account/settings/data.d';
-import useStyles from '@/pages/account/settings/style.style';
-import {
-  fetchCityOptions,
-  fetchProvinceOptions,
-  fetchSettingsCurrentUser,
-} from '../data/account';
+} from "@ant-design/pro-components";
+import { App, Button, Input, Menu, Upload } from "antd";
+import { useLayoutEffect, useRef, useState } from "react";
+import BindingView from "@/pages/account/settings/components/binding";
+import useBaseComponentStyles from "@/pages/account/settings/components/index.style";
+import NotificationView from "@/pages/account/settings/components/notification";
+import SecurityView from "@/pages/account/settings/components/security";
+import type { CurrentUser } from "@/pages/account/settings/data.d";
+import useStyles from "@/pages/account/settings/style.style";
+import { fetchCityOptions, fetchProvinceOptions, fetchSettingsCurrentUser } from "../data/account";
 
-type SettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
+type SettingsStateKeys = "base" | "security" | "binding" | "notification";
 
-const validatorPhone = (
-  _rule: unknown,
-  value: string[],
-  callback: (message?: string) => void,
-) => {
-  if (!value?.[0]) callback('Please input your area code!');
-  if (!value?.[1]) callback('Please input your phone number!');
+const validatorPhone = (_rule: unknown, value: string[], callback: (message?: string) => void) => {
+  if (!value?.[0]) callback("Please input your area code!");
+  if (!value?.[1]) callback("Please input your phone number!");
   callback();
 };
 
@@ -46,15 +38,15 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
             <ProForm
               layout="vertical"
               onFinish={async () => {
-                message.success('更新基本信息成功');
+                message.success("更新基本信息成功");
               }}
               submitter={{
-                searchConfig: { submitText: '更新基本信息' },
+                searchConfig: { submitText: "更新基本信息" },
                 render: (_, dom) => dom[1],
               }}
               initialValues={{
                 ...currentUser,
-                phone: currentUser.phone.split('-'),
+                phone: currentUser.phone.split("-"),
               }}
               hideRequiredMark
             >
@@ -62,30 +54,30 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
                 width="md"
                 name="email"
                 label="邮箱"
-                rules={[{ required: true, message: '请输入您的邮箱!' }]}
+                rules={[{ required: true, message: "请输入您的邮箱!" }]}
               />
               <ProFormText
                 width="md"
                 name="name"
                 label="昵称"
-                rules={[{ required: true, message: '请输入您的昵称!' }]}
+                rules={[{ required: true, message: "请输入您的昵称!" }]}
               />
               <ProFormTextArea
                 name="profile"
                 label="个人简介"
-                rules={[{ required: true, message: '请输入个人简介!' }]}
+                rules={[{ required: true, message: "请输入个人简介!" }]}
                 placeholder="个人简介"
               />
               <ProFormSelect
                 width="sm"
                 name="country"
                 label="国家/地区"
-                rules={[{ required: true, message: '请输入您的国家或地区!' }]}
-                options={[{ label: '中国', value: 'China' }]}
+                rules={[{ required: true, message: "请输入您的国家或地区!" }]}
+                options={[{ label: "中国", value: "China" }]}
               />
               <ProForm.Group title="所在省市" size={8}>
                 <ProFormSelect
-                  rules={[{ required: true, message: '请输入您的所在省!' }]}
+                  rules={[{ required: true, message: "请输入您的所在省!" }]}
                   width="sm"
                   fieldProps={{ labelInValue: true }}
                   name="province"
@@ -98,15 +90,13 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
                     }));
                   }}
                 />
-                <ProFormDependency name={['province']}>
+                <ProFormDependency name={["province"]}>
                   {({ province }) => (
                     <ProFormSelect
                       params={{ key: province?.value }}
                       name="city"
                       width="sm"
-                      rules={[
-                        { required: true, message: '请输入您的所在城市!' },
-                      ]}
+                      rules={[{ required: true, message: "请输入您的所在城市!" }]}
                       disabled={!province}
                       request={async () => {
                         if (!province?.value) return [];
@@ -124,13 +114,13 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
                 width="md"
                 name="address"
                 label="街道地址"
-                rules={[{ required: true, message: '请输入您的街道地址!' }]}
+                rules={[{ required: true, message: "请输入您的街道地址!" }]}
               />
               <ProFormFieldSet
                 name="phone"
                 label="联系电话"
                 rules={[
-                  { required: true, message: '请输入您的联系电话!' },
+                  { required: true, message: "请输入您的联系电话!" },
                   { validator: validatorPhone },
                 ]}
               >
@@ -162,11 +152,11 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
 const AccountSettingsPage = () => {
   const { styles } = useStyles();
   const [config, setConfig] = useState<{
-    mode: 'inline' | 'horizontal';
+    mode: "inline" | "horizontal";
     selectKey: SettingsStateKeys;
   }>({
-    mode: 'inline',
-    selectKey: 'base',
+    mode: "inline",
+    selectKey: "base",
   });
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const dom = useRef<HTMLDivElement>(null);
@@ -177,38 +167,37 @@ const AccountSettingsPage = () => {
     const resize = () => {
       requestAnimationFrame(() => {
         if (!dom.current) return;
-        let mode: 'inline' | 'horizontal' = 'inline';
+        let mode: "inline" | "horizontal" = "inline";
         const { offsetWidth } = dom.current;
-        if (dom.current.offsetWidth < 641 && offsetWidth > 400)
-          mode = 'horizontal';
-        if (window.innerWidth < 768 && offsetWidth > 400) mode = 'horizontal';
+        if (dom.current.offsetWidth < 641 && offsetWidth > 400) mode = "horizontal";
+        if (window.innerWidth < 768 && offsetWidth > 400) mode = "horizontal";
         setConfig((state) => ({ ...state, mode }));
       });
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     resize();
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
   const menuMap: Record<SettingsStateKeys, React.ReactNode> = {
-    base: '基本设置',
-    security: '安全设置',
-    binding: '账号绑定',
-    notification: '新消息通知',
+    base: "基本设置",
+    security: "安全设置",
+    binding: "账号绑定",
+    notification: "新消息通知",
   };
 
   const renderChildren = () => {
     switch (config.selectKey) {
-      case 'base':
+      case "base":
         return <BaseSettingsView currentUser={currentUser} />;
-      case 'security':
+      case "security":
         return <SecurityView />;
-      case 'binding':
+      case "binding":
         return <BindingView />;
-      case 'notification':
+      case "notification":
         return <NotificationView />;
       default:
         return null;

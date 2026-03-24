@@ -1,8 +1,8 @@
-import { Line, Tiny } from '@ant-design/plots';
-import { Card, Col, Row, Tabs } from 'antd';
-import type { DataItem, OfflineDataType } from '../data.d';
-import useStyles from '../style.style';
-import NumberInfo from './NumberInfo';
+import { Line, Tiny } from "@ant-design/plots";
+import { Card, Col, Row, Tabs } from "antd";
+import type { DataItem, OfflineDataType } from "../data.d";
+import useStyles from "../style.style";
+import NumberInfo from "./NumberInfo";
 
 const CustomTab = ({
   data,
@@ -15,7 +15,7 @@ const CustomTab = ({
     gutter={8}
     style={{
       width: 138,
-      margin: '8px 0',
+      margin: "8px 0",
     }}
   >
     <Col span={12}>
@@ -24,7 +24,7 @@ const CustomTab = ({
         subTitle="转化率"
         gap={2}
         total={`${data.cvr * 100}%`}
-        theme={currentKey !== data.name ? 'light' : undefined}
+        theme={currentKey !== data.name ? "light" : undefined}
       />
     </Col>
     <Col
@@ -33,12 +33,7 @@ const CustomTab = ({
         paddingTop: 36,
       }}
     >
-      <Tiny.Ring
-        height={60}
-        width={60}
-        percent={data.cvr}
-        color={['#E8EEF4', '#5FABF4']}
-      />
+      <Tiny.Ring height={60} width={60} percent={data.cvr} color={["#E8EEF4", "#5FABF4"]} />
     </Col>
   </Row>
 );
@@ -75,7 +70,7 @@ const OfflineData = ({
           children: (
             <div
               style={{
-                padding: '0 24px',
+                padding: "0 24px",
               }}
             >
               <Line
@@ -90,13 +85,13 @@ const OfflineData = ({
                   y: {
                     title: false,
                     gridLineDash: null,
-                    gridStroke: '#ccc',
+                    gridStroke: "#ccc",
                     gridStrokeOpacity: 1,
                   },
                 }}
                 legend={{
                   color: {
-                    layout: { justifyContent: 'center' },
+                    layout: { justifyContent: "center" },
                   },
                 }}
               />

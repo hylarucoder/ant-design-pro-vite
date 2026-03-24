@@ -14,197 +14,188 @@ import {
   TableOutlined,
   UnorderedListOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { ProLayout } from '@ant-design/pro-components';
-import type { MenuProps } from 'antd';
-import { Avatar, Button, Dropdown } from 'antd';
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import Footer from '@/components/Footer';
-import Settings from '../../config/defaultSettings';
-import {
-  clearStoredUser,
-  getStoredUser,
-  subscribeAuthChange,
-} from '../services/auth';
+} from "@ant-design/icons";
+import { ProLayout } from "@ant-design/pro-components";
+import type { MenuProps } from "antd";
+import { Avatar, Button, Dropdown } from "antd";
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
+import Settings from "../../config/defaultSettings";
+import { clearStoredUser, getStoredUser, subscribeAuthChange } from "../services/auth";
 
 const navigationItems = [
   {
-    key: '/dashboard',
+    key: "/dashboard",
     icon: <DashboardOutlined />,
-    label: 'Dashboard',
+    label: "Dashboard",
     children: [
       {
-        key: '/dashboard/analysis',
+        key: "/dashboard/analysis",
         icon: <LineChartOutlined />,
-        label: '分析页',
+        label: "分析页",
       },
       {
-        key: '/dashboard/monitor',
+        key: "/dashboard/monitor",
         icon: <MonitorOutlined />,
-        label: '监控页',
+        label: "监控页",
       },
       {
-        key: '/dashboard/workplace',
+        key: "/dashboard/workplace",
         icon: <DashboardOutlined />,
-        label: '工作台',
+        label: "工作台",
       },
     ],
   },
   {
-    key: '/form',
+    key: "/form",
     icon: <FormOutlined />,
-    label: '表单页',
+    label: "表单页",
     children: [
       {
-        key: '/form/basic-form',
+        key: "/form/basic-form",
         icon: <FormOutlined />,
-        label: '基础表单',
+        label: "基础表单",
       },
       {
-        key: '/form/step-form',
+        key: "/form/step-form",
         icon: <FormOutlined />,
-        label: '分步表单',
+        label: "分步表单",
       },
       {
-        key: '/form/advanced-form',
+        key: "/form/advanced-form",
         icon: <FormOutlined />,
-        label: '高级表单',
+        label: "高级表单",
       },
     ],
   },
   {
-    key: '/list',
+    key: "/list",
     icon: <TableOutlined />,
-    label: '列表页',
+    label: "列表页",
     children: [
       {
-        key: '/list/search',
+        key: "/list/search",
         icon: <FileSearchOutlined />,
-        label: '搜索列表',
+        label: "搜索列表",
         children: [
           {
-            key: '/list/search/articles',
+            key: "/list/search/articles",
             icon: <FileTextOutlined />,
-            label: '搜索列表（文章）',
+            label: "搜索列表（文章）",
           },
           {
-            key: '/list/search/projects',
+            key: "/list/search/projects",
             icon: <AppstoreOutlined />,
-            label: '搜索列表（项目）',
+            label: "搜索列表（项目）",
           },
           {
-            key: '/list/search/applications',
+            key: "/list/search/applications",
             icon: <AppstoreOutlined />,
-            label: '搜索列表（应用）',
+            label: "搜索列表（应用）",
           },
         ],
       },
       {
-        key: '/list/table-list',
+        key: "/list/table-list",
         icon: <BarsOutlined />,
-        label: '查询表格',
+        label: "查询表格",
       },
       {
-        key: '/list/basic-list',
+        key: "/list/basic-list",
         icon: <UnorderedListOutlined />,
-        label: '标准列表',
+        label: "标准列表",
       },
       {
-        key: '/list/card-list',
+        key: "/list/card-list",
         icon: <AppstoreOutlined />,
-        label: '卡片列表',
+        label: "卡片列表",
       },
     ],
   },
   {
-    key: '/profile',
+    key: "/profile",
     icon: <FileTextOutlined />,
-    label: '详情页',
+    label: "详情页",
     children: [
       {
-        key: '/profile/basic',
+        key: "/profile/basic",
         icon: <FileTextOutlined />,
-        label: '基础详情页',
+        label: "基础详情页",
       },
       {
-        key: '/profile/advanced',
+        key: "/profile/advanced",
         icon: <FileTextOutlined />,
-        label: '高级详情页',
+        label: "高级详情页",
       },
     ],
   },
   {
-    key: '/result',
+    key: "/result",
     icon: <CheckCircleOutlined />,
-    label: '结果页',
+    label: "结果页",
     children: [
       {
-        key: '/result/success',
+        key: "/result/success",
         icon: <CheckCircleOutlined />,
-        label: '成功页',
+        label: "成功页",
       },
       {
-        key: '/result/fail',
+        key: "/result/fail",
         icon: <CheckCircleOutlined />,
-        label: '失败页',
+        label: "失败页",
       },
     ],
   },
   {
-    key: '/exception',
+    key: "/exception",
     icon: <SafetyCertificateOutlined />,
-    label: '异常页',
+    label: "异常页",
     children: [
       {
-        key: '/exception/403',
+        key: "/exception/403",
         icon: <SafetyCertificateOutlined />,
-        label: '403',
+        label: "403",
       },
       {
-        key: '/exception/404',
+        key: "/exception/404",
         icon: <SafetyCertificateOutlined />,
-        label: '404',
+        label: "404",
       },
       {
-        key: '/exception/500',
+        key: "/exception/500",
         icon: <SafetyCertificateOutlined />,
-        label: '500',
+        label: "500",
       },
     ],
   },
   {
-    key: '/account',
+    key: "/account",
     icon: <UserOutlined />,
-    label: '个人页',
+    label: "个人页",
     children: [
       {
-        key: '/account/center',
+        key: "/account/center",
         icon: <UserOutlined />,
-        label: '个人中心',
+        label: "个人中心",
       },
       {
-        key: '/account/settings',
+        key: "/account/settings",
         icon: <UserOutlined />,
-        label: '个人设置',
+        label: "个人设置",
       },
     ],
   },
-] satisfies MenuProps['items'];
+] satisfies MenuProps["items"];
 
 const flattenNavigationItems = (
   items: typeof navigationItems,
 ): Array<{ key: string; label: string }> => {
   return items.flatMap((item) => {
     const current =
-      typeof item.key === 'string'
-        ? [{ key: item.key, label: String(item.label) }]
-        : [];
-    if ('children' in item && Array.isArray(item.children)) {
-      return [
-        ...current,
-        ...flattenNavigationItems(item.children as typeof navigationItems),
-      ];
+      typeof item.key === "string" ? [{ key: item.key, label: String(item.label) }] : [];
+    if ("children" in item && Array.isArray(item.children)) {
+      return [...current, ...flattenNavigationItems(item.children as typeof navigationItems)];
     }
     return current;
   });
@@ -215,7 +206,7 @@ const matchSelectedKey = (pathname: string) => {
     .filter((item) => pathname.startsWith(item.key))
     .sort((a, b) => b.key.length - a.key.length)[0];
 
-  return matchedItem?.key ?? '/dashboard/workplace';
+  return matchedItem?.key ?? "/dashboard/workplace";
 };
 
 const AppShell = () => {
@@ -223,34 +214,34 @@ const AppShell = () => {
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(getStoredUser());
   const titleMap: Record<string, string> = {
-    '/welcome': '欢迎页 - Ant Design Pro',
-    '/migration': '迁移计划 - Ant Design Pro',
-    '/dashboard/workplace': '工作台 - Ant Design Pro',
-    '/dashboard/analysis': '分析页 - Ant Design Pro',
-    '/dashboard/monitor': '监控页 - Ant Design Pro',
-    '/form/basic-form': '基础表单 - Ant Design Pro',
-    '/form/step-form': '分步表单 - Ant Design Pro',
-    '/form/advanced-form': '高级表单 - Ant Design Pro',
-    '/list/search/articles': '搜索列表（文章） - Ant Design Pro',
-    '/list/search/projects': '搜索列表（项目） - Ant Design Pro',
-    '/list/search/applications': '搜索列表（应用） - Ant Design Pro',
-    '/list/table-list': '查询表格 - Ant Design Pro',
-    '/list/basic-list': '标准列表 - Ant Design Pro',
-    '/list/card-list': '卡片列表 - Ant Design Pro',
-    '/profile/basic': '基础详情页 - Ant Design Pro',
-    '/profile/advanced': '高级详情页 - Ant Design Pro',
-    '/result/success': '成功页 - Ant Design Pro',
-    '/result/fail': '失败页 - Ant Design Pro',
-    '/exception/403': '403 - Ant Design Pro',
-    '/exception/404': '404 - Ant Design Pro',
-    '/exception/500': '500 - Ant Design Pro',
-    '/account/center': '个人中心 - Ant Design Pro',
-    '/account/settings': '个人设置 - Ant Design Pro',
+    "/welcome": "欢迎页 - Ant Design Pro",
+    "/migration": "迁移计划 - Ant Design Pro",
+    "/dashboard/workplace": "工作台 - Ant Design Pro",
+    "/dashboard/analysis": "分析页 - Ant Design Pro",
+    "/dashboard/monitor": "监控页 - Ant Design Pro",
+    "/form/basic-form": "基础表单 - Ant Design Pro",
+    "/form/step-form": "分步表单 - Ant Design Pro",
+    "/form/advanced-form": "高级表单 - Ant Design Pro",
+    "/list/search/articles": "搜索列表（文章） - Ant Design Pro",
+    "/list/search/projects": "搜索列表（项目） - Ant Design Pro",
+    "/list/search/applications": "搜索列表（应用） - Ant Design Pro",
+    "/list/table-list": "查询表格 - Ant Design Pro",
+    "/list/basic-list": "标准列表 - Ant Design Pro",
+    "/list/card-list": "卡片列表 - Ant Design Pro",
+    "/profile/basic": "基础详情页 - Ant Design Pro",
+    "/profile/advanced": "高级详情页 - Ant Design Pro",
+    "/result/success": "成功页 - Ant Design Pro",
+    "/result/fail": "失败页 - Ant Design Pro",
+    "/exception/403": "403 - Ant Design Pro",
+    "/exception/404": "404 - Ant Design Pro",
+    "/exception/500": "500 - Ant Design Pro",
+    "/account/center": "个人中心 - Ant Design Pro",
+    "/account/settings": "个人设置 - Ant Design Pro",
   };
   document.title =
     titleMap[location.pathname] ??
     titleMap[matchSelectedKey(location.pathname)] ??
-    'Ant Design Pro';
+    "Ant Design Pro";
 
   useEffect(() => {
     return subscribeAuthChange(() => {
@@ -260,7 +251,7 @@ const AppShell = () => {
 
   const handleLogout = () => {
     clearStoredUser();
-    navigate('/user/login?redirect=/dashboard/workplace', { replace: true });
+    navigate("/user/login?redirect=/dashboard/workplace", { replace: true });
   };
 
   const menuRoutes = navigationItems.map((item) => ({
@@ -268,13 +259,13 @@ const AppShell = () => {
     name: item.label as string,
     icon: item.icon,
     routes:
-      'children' in item && Array.isArray(item.children)
+      "children" in item && Array.isArray(item.children)
         ? item.children.map((child) => ({
             path: child.key as string,
             name: child.label as string,
             icon: child.icon,
             routes:
-              'children' in child && Array.isArray(child.children)
+              "children" in child && Array.isArray(child.children)
                 ? child.children.map((grandChild) => ({
                     path: grandChild.key as string,
                     name: grandChild.label as string,
@@ -292,9 +283,7 @@ const AppShell = () => {
       logo={Settings.logo}
       location={{ pathname: location.pathname }}
       route={{ routes: menuRoutes }}
-      menuItemRender={(item, dom) => (
-        <Link to={item.path || '/welcome'}>{dom}</Link>
-      )}
+      menuItemRender={(item, dom) => <Link to={item.path || "/welcome"}>{dom}</Link>}
       menuHeaderRender={false}
       actionsRender={() => {
         const actions = [
@@ -304,10 +293,10 @@ const AppShell = () => {
             target="_blank"
             rel="noreferrer"
             style={{
-              display: 'inline-flex',
+              display: "inline-flex",
               padding: 4,
               fontSize: 18,
-              color: 'inherit',
+              color: "inherit",
             }}
           >
             <QuestionCircleOutlined />
@@ -319,9 +308,7 @@ const AppShell = () => {
             <Button
               key="login"
               type="link"
-              onClick={() =>
-                navigate('/user/login?redirect=/dashboard/workplace')
-              }
+              onClick={() => navigate("/user/login?redirect=/dashboard/workplace")}
             >
               登录
             </Button>,
@@ -340,27 +327,27 @@ const AppShell = () => {
                   menu={{
                     items: [
                       {
-                        key: 'center',
+                        key: "center",
                         icon: <UserOutlined />,
-                        label: '个人中心',
+                        label: "个人中心",
                       },
                       {
-                        type: 'divider',
+                        type: "divider",
                       },
                       {
-                        key: 'logout',
+                        key: "logout",
                         icon: <LogoutOutlined />,
-                        label: '退出登录',
+                        label: "退出登录",
                       },
                     ],
                     onClick: ({ key }) => {
-                      if (key === 'logout') {
+                      if (key === "logout") {
                         handleLogout();
                       }
                     },
                   }}
                 >
-                  <span style={{ cursor: 'pointer' }}>
+                  <span style={{ cursor: "pointer" }}>
                     {dom ?? <Avatar src={currentUser.avatar} />}
                   </span>
                 </Dropdown>
@@ -371,22 +358,22 @@ const AppShell = () => {
       footerRender={() => <Footer />}
       bgLayoutImgList={[
         {
-          src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
+          src: "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr",
           left: 85,
           bottom: 100,
-          height: '303px',
+          height: "303px",
         },
         {
-          src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr',
+          src: "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr",
           bottom: -68,
           right: -45,
-          height: '303px',
+          height: "303px",
         },
         {
-          src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr',
+          src: "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr",
           bottom: 0,
           left: 0,
-          width: '331px',
+          width: "331px",
         },
       ]}
     >

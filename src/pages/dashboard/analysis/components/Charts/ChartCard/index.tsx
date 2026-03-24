@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Card } from 'antd';
-import type { CardProps } from 'antd/es/card';
-import classNames from 'classnames';
-import React from 'react';
-import useStyles from './index.style';
+import { Card } from "antd";
+import type { CardProps } from "antd/es/card";
+import classNames from "classnames";
+import React from "react";
+import useStyles from "./index.style";
 
 type totalType = () => React.ReactNode;
 
@@ -25,10 +25,10 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     }
     let totalDom: React.ReactNode | null = null;
     switch (typeof total) {
-      case 'undefined':
+      case "undefined":
         totalDom = null;
         break;
-      case 'function':
+      case "function":
         totalDom = <div className={styles.total}>{total()}</div>;
         break;
       default:
@@ -37,16 +37,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     return totalDom;
   };
   const renderContent = () => {
-    const {
-      contentHeight,
-      title,
-      avatar,
-      action,
-      total,
-      footer,
-      children,
-      loading,
-    } = props;
+    const { contentHeight, title, avatar, action, total, footer, children, loading } = props;
     if (loading) {
       return false;
     }
@@ -70,12 +61,10 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
           <div
             className={styles.content}
             style={{
-              height: contentHeight || 'auto',
+              height: contentHeight || "auto",
             }}
           >
-            <div className={contentHeight ? styles.contentFixed : undefined}>
-              {children}
-            </div>
+            <div className={contentHeight ? styles.contentFixed : undefined}>{children}</div>
           </div>
         )}
         {footer && (
@@ -105,10 +94,10 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
   return (
     <Card
       loading={loading}
-      variant={bordered === false ? 'borderless' : rest.variant}
+      variant={bordered === false ? "borderless" : rest.variant}
       styles={{
         body: {
-          padding: '20px 24px 8px 24px',
+          padding: "20px 24px 8px 24px",
         },
       }}
       {...rest}

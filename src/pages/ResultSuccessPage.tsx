@@ -1,7 +1,7 @@
-import { DingdingOutlined } from '@ant-design/icons';
-import { GridContent } from '@ant-design/pro-components';
-import { Button, Card, Descriptions, Result, Steps } from 'antd';
-import useStyles from '@/pages/result/success/index.style';
+import { DingdingOutlined } from "@ant-design/icons";
+import { GridContent } from "@ant-design/pro-components";
+import { Button, Card, Descriptions, Result, Steps } from "antd";
+import useStyles from "@/pages/result/success/index.style";
 
 const { Step } = Steps;
 
@@ -10,9 +10,9 @@ const ResultSuccessPage = () => {
 
   const desc1 = (
     <div className={styles.title}>
-      <div style={{ margin: '8px 0 4px' }}>
+      <div style={{ margin: "8px 0 4px" }}>
         <span>曲丽丽</span>
-        <DingdingOutlined style={{ marginLeft: 8, color: '#00A0E9' }} />
+        <DingdingOutlined style={{ marginLeft: 8, color: "#00A0E9" }} />
       </div>
       <div>2016-12-12 12:32</div>
     </div>
@@ -20,10 +20,10 @@ const ResultSuccessPage = () => {
 
   const desc2 = (
     <div style={{ fontSize: 12 }} className={styles.title}>
-      <div style={{ margin: '8px 0 4px' }}>
+      <div style={{ margin: "8px 0 4px" }}>
         <span>周毛毛</span>
         <a href="">
-          <DingdingOutlined style={{ color: '#00A0E9', marginLeft: 8 }} />
+          <DingdingOutlined style={{ color: "#00A0E9", marginLeft: 8 }} />
           <span>催一下</span>
         </a>
       </div>
@@ -50,20 +50,12 @@ const ResultSuccessPage = () => {
             <Descriptions title="项目名称">
               <Descriptions.Item label="项目 ID">23421</Descriptions.Item>
               <Descriptions.Item label="负责人">曲丽丽</Descriptions.Item>
-              <Descriptions.Item label="生效时间">
-                2016-12-12 ~ 2017-12-12
-              </Descriptions.Item>
+              <Descriptions.Item label="生效时间">2016-12-12 ~ 2017-12-12</Descriptions.Item>
             </Descriptions>
             <br />
             <Steps progressDot current={1}>
-              <Step
-                title={<span style={{ fontSize: 14 }}>创建项目</span>}
-                description={desc1}
-              />
-              <Step
-                title={<span style={{ fontSize: 14 }}>部门初审</span>}
-                description={desc2}
-              />
+              <Step title={<span style={{ fontSize: 14 }}>创建项目</span>} description={desc1} />
+              <Step title={<span style={{ fontSize: 14 }}>部门初审</span>} description={desc2} />
               <Step title={<span style={{ fontSize: 14 }}>财务复核</span>} />
               <Step title={<span style={{ fontSize: 14 }}>完成</span>} />
             </Steps>

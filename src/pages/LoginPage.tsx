@@ -5,58 +5,53 @@ import {
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 import {
   LoginForm,
   ProFormCaptcha,
   ProFormCheckbox,
   ProFormText,
-} from '@ant-design/pro-components';
-import { Alert, App, Tabs } from 'antd';
-import { createStyles } from 'antd-style';
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Footer from '@/components/Footer';
-import {
-  type LoginMode,
-  type LoginResult,
-  performLogin,
-  requestCaptcha,
-} from '../services/auth';
+} from "@ant-design/pro-components";
+import { Alert, App, Tabs } from "antd";
+import { createStyles } from "antd-style";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Footer from "@/components/Footer";
+import { type LoginMode, type LoginResult, performLogin, requestCaptcha } from "../services/auth";
 
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
-      marginLeft: '8px',
-      color: 'rgba(0, 0, 0, 0.2)',
-      fontSize: '24px',
-      verticalAlign: 'middle',
-      cursor: 'pointer',
-      transition: 'color 0.3s',
-      '&:hover': {
+      marginLeft: "8px",
+      color: "rgba(0, 0, 0, 0.2)",
+      fontSize: "24px",
+      verticalAlign: "middle",
+      cursor: "pointer",
+      transition: "color 0.3s",
+      "&:hover": {
         color: token.colorPrimaryActive,
       },
     },
     lang: {
       width: 42,
       height: 42,
-      lineHeight: '42px',
-      position: 'fixed',
+      lineHeight: "42px",
+      position: "fixed",
       right: 16,
       borderRadius: token.borderRadius,
-      textAlign: 'center',
-      ':hover': {
+      textAlign: "center",
+      ":hover": {
         backgroundColor: token.colorBgTextHover,
       },
     },
     container: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      overflow: 'auto',
+      display: "flex",
+      flexDirection: "column",
+      height: "100vh",
+      overflow: "auto",
       backgroundImage:
         "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
-      backgroundSize: '100% 100%',
+      backgroundSize: "100% 100%",
     },
   };
 });
@@ -74,41 +69,34 @@ const ActionIcons = () => {
 };
 
 const LoginMessage = ({ content }: { content: string }) => {
-  return (
-    <Alert
-      style={{ marginBottom: 24 }}
-      message={content}
-      type="error"
-      showIcon
-    />
-  );
+  return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
 };
 
 const LoginPage = () => {
   const [loginState, setLoginState] = useState<LoginResult | null>(null);
-  const [type, setType] = useState<LoginMode>('account');
+  const [type, setType] = useState<LoginMode>("account");
   const { styles } = useStyles();
   const { message } = App.useApp();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    document.title = '登录页 - Ant Design Pro';
+    document.title = "登录页 - Ant Design Pro";
   }, []);
 
   const handleSubmit = async (values: Record<string, unknown>) => {
     try {
       const result = await performLogin(values, type);
-      if (result.status === 'ok') {
-        message.success('登录成功');
-        const redirect = searchParams.get('redirect') || '/dashboard/workplace';
+      if (result.status === "ok") {
+        message.success("登录成功");
+        const redirect = searchParams.get("redirect") || "/dashboard/workplace";
         navigate(redirect, { replace: true });
         return;
       }
 
       setLoginState(result);
     } catch {
-      message.error('登录失败，请重试');
+      message.error("登录失败，请重试");
     }
   };
 
@@ -118,14 +106,14 @@ const LoginPage = () => {
 
       <div
         style={{
-          flex: '1',
-          padding: '32px 0',
+          flex: "1",
+          padding: "32px 0",
         }}
       >
         <LoginForm
           contentStyle={{
             minWidth: 280,
-            maxWidth: '75vw',
+            maxWidth: "75vw",
           }}
           logo={<img alt="logo" src="/logo.svg" />}
           title="Ant Design"
@@ -133,10 +121,7 @@ const LoginPage = () => {
           initialValues={{
             autoLogin: true,
           }}
-          actions={[
-            <span key="loginWith">其他登录方式 :</span>,
-            <ActionIcons key="icons" />,
-          ]}
+          actions={[<span key="loginWith">其他登录方式 :</span>, <ActionIcons key="icons" />]}
           onFinish={handleSubmit}
         >
           <Tabs
@@ -145,106 +130,106 @@ const LoginPage = () => {
             centered
             items={[
               {
-                key: 'account',
-                label: '账户密码登录',
+                key: "account",
+                label: "账户密码登录",
               },
               {
-                key: 'mobile',
-                label: '手机号登录',
+                key: "mobile",
+                label: "手机号登录",
               },
             ]}
           />
 
-          {loginState?.status === 'error' && loginState.type === 'account' && (
+          {loginState?.status === "error" && loginState.type === "account" && (
             <LoginMessage content="错误的用户名和密码(admin/ant.design)" />
           )}
 
-          {type === 'account' && (
+          {type === "account" && (
             <>
               <ProFormText
                 name="username"
                 fieldProps={{
-                  size: 'large',
+                  size: "large",
                   prefix: <UserOutlined />,
-                  autoComplete: 'username',
+                  autoComplete: "username",
                 }}
                 placeholder="用户名: admin or user"
                 rules={[
                   {
                     required: true,
-                    message: '用户名是必填项！',
+                    message: "用户名是必填项！",
                   },
                 ]}
               />
               <ProFormText.Password
                 name="password"
                 fieldProps={{
-                  size: 'large',
+                  size: "large",
                   prefix: <LockOutlined />,
-                  autoComplete: 'current-password',
+                  autoComplete: "current-password",
                 }}
                 placeholder="密码: ant.design"
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！',
+                    message: "密码是必填项！",
                   },
                 ]}
               />
             </>
           )}
 
-          {loginState?.status === 'error' && loginState.type === 'mobile' && (
+          {loginState?.status === "error" && loginState.type === "mobile" && (
             <LoginMessage content="验证码错误" />
           )}
 
-          {type === 'mobile' && (
+          {type === "mobile" && (
             <>
               <ProFormText
                 fieldProps={{
-                  size: 'large',
+                  size: "large",
                   prefix: <MobileOutlined />,
-                  autoComplete: 'tel',
+                  autoComplete: "tel",
                 }}
                 name="mobile"
                 placeholder="请输入手机号！"
                 rules={[
                   {
                     required: true,
-                    message: '手机号是必填项！',
+                    message: "手机号是必填项！",
                   },
                   {
                     pattern: /^1\d{10}$/,
-                    message: '不合法的手机号！',
+                    message: "不合法的手机号！",
                   },
                 ]}
               />
               <ProFormCaptcha
                 fieldProps={{
-                  size: 'large',
+                  size: "large",
                   prefix: <LockOutlined />,
-                  autoComplete: 'one-time-code',
+                  autoComplete: "one-time-code",
                 }}
                 captchaProps={{
-                  size: 'large',
+                  size: "large",
                 }}
                 placeholder="请输入验证码！"
                 captchaTextRender={(timing, count) => {
                   if (timing) {
                     return `${count} 秒后重新获取`;
                   }
-                  return '获取验证码';
+                  return "获取验证码";
                 }}
                 name="captcha"
                 rules={[
                   {
                     required: true,
-                    message: '验证码是必填项！',
+                    message: "验证码是必填项！",
                   },
                 ]}
                 onGetCaptcha={async (phone) => {
                   const result = await requestCaptcha(phone);
-                  if (result.status !== 'ok') {
+                  if (result.status !== "ok") {
                     message.error(result.message);
                     return;
                   }
@@ -264,7 +249,7 @@ const LoginPage = () => {
             </ProFormCheckbox>
             <a
               style={{
-                float: 'right',
+                float: "right",
               }}
               href="https://pro.ant.design"
               target="_blank"

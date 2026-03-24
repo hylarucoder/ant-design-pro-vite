@@ -1,16 +1,8 @@
-import { PageLoading } from '@ant-design/pro-components';
-import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
-import * as React from 'react';
+import { PageLoading } from "@ant-design/pro-components";
+import { HeatmapLayer, MapboxScene, PointLayer } from "@antv/l7-react";
+import * as React from "react";
 
-const colors = [
-  '#eff3ff',
-  '#c6dbef',
-  '#9ecae1',
-  '#6baed6',
-  '#4292c6',
-  '#2171b5',
-  '#084594',
-];
+const colors = ["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"];
 export default class MonitorMap extends React.Component {
   state = {
     data: null,
@@ -19,16 +11,15 @@ export default class MonitorMap extends React.Component {
   };
 
   private supportsWebGL() {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
     try {
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       return Boolean(
         window.WebGLRenderingContext &&
-          (canvas.getContext('webgl') ||
-            canvas.getContext('experimental-webgl')),
+        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")),
       );
     } catch {
       return false;
@@ -45,10 +36,10 @@ export default class MonitorMap extends React.Component {
 
     const [geoData, gridData] = await Promise.all([
       fetch(
-        'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
+        "https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json",
       ).then((d) => d.json()),
       fetch(
-        'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
+        "https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json",
       ).then((d) => d.json()),
     ]);
     this.setState({
@@ -64,12 +55,12 @@ export default class MonitorMap extends React.Component {
       return (
         <div
           style={{
-            height: '452px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#999',
-            background: 'linear-gradient(180deg, #fafcff 0%, #f4f7fb 100%)',
+            height: "452px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#999",
+            background: "linear-gradient(180deg, #fafcff 0%, #f4f7fb 100%)",
           }}
         >
           当前环境不支持地图渲染，已切换为占位展示
@@ -83,13 +74,13 @@ export default class MonitorMap extends React.Component {
         map={{
           center: [110.19382669582967, 50.258134],
           pitch: 0,
-          style: 'blank',
+          style: "blank",
           zoom: 1,
         }}
         style={{
-          position: 'relative',
-          width: '100%',
-          height: '452px',
+          position: "relative",
+          width: "100%",
+          height: "452px",
         }}
       >
         {grid && (
@@ -99,18 +90,18 @@ export default class MonitorMap extends React.Component {
               data: grid,
               transforms: [
                 {
-                  type: 'hexagon',
+                  type: "hexagon",
                   size: 800000,
-                  field: 'capacity',
-                  method: 'sum',
+                  field: "capacity",
+                  method: "sum",
                 },
               ],
             }}
             color={{
-              values: '#ddd',
+              values: "#ddd",
             }}
             shape={{
-              values: 'hexagon',
+              values: "hexagon",
             }}
             style={{
               coverage: 0.7,
@@ -130,29 +121,29 @@ export default class MonitorMap extends React.Component {
             scale={{
               values: {
                 color: {
-                  field: 'cum_conf',
-                  type: 'quantile',
+                  field: "cum_conf",
+                  type: "quantile",
                 },
                 size: {
-                  field: 'cum_conf',
-                  type: 'log',
+                  field: "cum_conf",
+                  type: "log",
                 },
               },
             }}
             color={{
-              field: 'cum_conf',
+              field: "cum_conf",
               values: colors,
             }}
             shape={{
-              values: 'circle',
+              values: "circle",
             }}
             active={{
               option: {
-                color: '#0c2c84',
+                color: "#0c2c84",
               },
             }}
             size={{
-              field: 'cum_conf',
+              field: "cum_conf",
               values: [0, 30],
             }}
             style={{
@@ -165,14 +156,14 @@ export default class MonitorMap extends React.Component {
               data,
             }}
             color={{
-              values: '#fff',
+              values: "#fff",
             }}
             shape={{
-              field: 'Short_Name_ZH',
-              values: 'text',
+              field: "Short_Name_ZH",
+              values: "text",
             }}
             filter={{
-              field: 'cum_conf',
+              field: "cum_conf",
               values: (v) => {
                 return v > 2000;
               },

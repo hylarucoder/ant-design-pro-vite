@@ -1,7 +1,7 @@
-import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
-import { GridContent } from '@ant-design/pro-components';
-import { Button, Card, Result } from 'antd';
-import useStyles from '@/pages/result/fail/index.style';
+import { CloseCircleOutlined, RightOutlined } from "@ant-design/icons";
+import { GridContent } from "@ant-design/pro-components";
+import { Button, Card, Result } from "antd";
+import useStyles from "@/pages/result/fail/index.style";
 
 const ResultFailPage = () => {
   const { styles } = useStyles();
@@ -25,10 +25,7 @@ const ResultFailPage = () => {
               <span>您提交的内容有如下错误：</span>
             </div>
             <div style={{ marginBottom: 16 }}>
-              <CloseCircleOutlined
-                style={{ marginRight: 8 }}
-                className={styles.error_icon}
-              />
+              <CloseCircleOutlined style={{ marginRight: 8 }} className={styles.error_icon} />
               <span>您的账户已被冻结</span>
               <a style={{ marginLeft: 16 }}>
                 <span>立即解冻</span>
@@ -36,10 +33,7 @@ const ResultFailPage = () => {
               </a>
             </div>
             <div>
-              <CloseCircleOutlined
-                style={{ marginRight: 8 }}
-                className={styles.error_icon}
-              />
+              <CloseCircleOutlined style={{ marginRight: 8 }} className={styles.error_icon} />
               <span>您的账户还不具备申请资格</span>
               <a style={{ marginLeft: 16 }}>
                 <span>立即升级</span>

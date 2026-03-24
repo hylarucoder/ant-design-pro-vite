@@ -1,12 +1,10 @@
-import React from 'react';
+import React from "react";
 
-export type IReactComponent<P = any> =
-  | React.ComponentClass<P>
-  | React.ClassicComponentClass<P>;
+export type IReactComponent<P = any> = React.ComponentClass<P> | React.ClassicComponentClass<P>;
 
 function computeHeight(node: HTMLDivElement) {
   const { style } = node;
-  style.height = '100%';
+  style.height = "100%";
   const totalHeight = parseInt(`${getComputedStyle(node).height}`, 10);
   const padding =
     parseInt(`${getComputedStyle(node).paddingTop}`, 10) +

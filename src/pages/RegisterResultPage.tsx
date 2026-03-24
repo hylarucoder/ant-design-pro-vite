@@ -1,11 +1,11 @@
-import { Button, Result } from 'antd';
-import { Link, useSearchParams } from 'react-router-dom';
-import useStyles from '@/pages/user/register-result/style.style';
+import { Button, Result } from "antd";
+import { Link, useSearchParams } from "react-router-dom";
+import useStyles from "@/pages/user/register-result/style.style";
 
 const RegisterResultPage = () => {
   const { styles } = useStyles();
   const [params] = useSearchParams();
-  const email = params.get('account') || 'AntDesign@example.com';
+  const email = params.get("account") || "AntDesign@example.com";
 
   return (
     <Result

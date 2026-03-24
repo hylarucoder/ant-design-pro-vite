@@ -1,27 +1,27 @@
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Badge, Card, Descriptions, Divider } from 'antd';
-import type { BasicGood, BasicProgress } from '@/pages/profile/basic/data.d';
-import useStyles from '@/pages/profile/basic/style.style';
-import { fetchBasicProfile } from '../data/account';
-import { useAsyncData } from '../hooks/useAsyncData';
+import type { ProColumns } from "@ant-design/pro-components";
+import { PageContainer, ProTable } from "@ant-design/pro-components";
+import { Badge, Card, Descriptions, Divider } from "antd";
+import type { BasicGood, BasicProgress } from "@/pages/profile/basic/data.d";
+import useStyles from "@/pages/profile/basic/style.style";
+import { fetchBasicProfile } from "../data/account";
+import { useAsyncData } from "../hooks/useAsyncData";
 
 const progressColumns: ProColumns<BasicProgress>[] = [
-  { title: '时间', dataIndex: 'time', key: 'time' },
-  { title: '当前进度', dataIndex: 'rate', key: 'rate' },
+  { title: "时间", dataIndex: "time", key: "time" },
+  { title: "当前进度", dataIndex: "rate", key: "rate" },
   {
-    title: '状态',
-    dataIndex: 'status',
-    key: 'status',
+    title: "状态",
+    dataIndex: "status",
+    key: "status",
     render: (text: React.ReactNode) =>
-      text === 'success' ? (
+      text === "success" ? (
         <Badge status="success" text="成功" />
       ) : (
         <Badge status="processing" text="进行中" />
       ),
   },
-  { title: '操作员ID', dataIndex: 'operator', key: 'operator' },
-  { title: '耗时', dataIndex: 'cost', key: 'cost' },
+  { title: "操作员ID", dataIndex: "operator", key: "operator" },
+  { title: "耗时", dataIndex: "cost", key: "cost" },
 ];
 
 const ProfileBasicPage = () => {
@@ -38,7 +38,7 @@ const ProfileBasicPage = () => {
       num += Number(item.num);
       amount += Number(item.amount);
     });
-    goodsData = basicGoods.concat({ id: '总计', num, amount });
+    goodsData = basicGoods.concat({ id: "总计", num, amount });
   }
 
   const renderContent = (value: React.ReactNode, _: unknown, index: number) => {
@@ -52,9 +52,9 @@ const ProfileBasicPage = () => {
 
   const goodsColumns: ProColumns<BasicGood>[] = [
     {
-      title: '商品编号',
-      dataIndex: 'id',
-      key: 'id',
+      title: "商品编号",
+      dataIndex: "id",
+      key: "id",
       render: (text: React.ReactNode, _: unknown, index: number) =>
         index < basicGoods.length ? (
           <span>{text}</span>
@@ -66,47 +66,39 @@ const ProfileBasicPage = () => {
         ),
     },
     {
-      title: '商品名称',
-      dataIndex: 'name',
-      key: 'name',
+      title: "商品名称",
+      dataIndex: "name",
+      key: "name",
       render: renderContent,
     },
     {
-      title: '商品条码',
-      dataIndex: 'barcode',
-      key: 'barcode',
+      title: "商品条码",
+      dataIndex: "barcode",
+      key: "barcode",
       render: renderContent,
     },
     {
-      title: '单价',
-      dataIndex: 'price',
-      key: 'price',
-      align: 'right',
+      title: "单价",
+      dataIndex: "price",
+      key: "price",
+      align: "right",
       render: renderContent,
     },
     {
-      title: '数量（件）',
-      dataIndex: 'num',
-      key: 'num',
-      align: 'right',
+      title: "数量（件）",
+      dataIndex: "num",
+      key: "num",
+      align: "right",
       render: (text: React.ReactNode, _: unknown, index: number) =>
-        index < basicGoods.length ? (
-          text
-        ) : (
-          <span style={{ fontWeight: 600 }}>{text}</span>
-        ),
+        index < basicGoods.length ? text : <span style={{ fontWeight: 600 }}>{text}</span>,
     },
     {
-      title: '金额',
-      dataIndex: 'amount',
-      key: 'amount',
-      align: 'right',
+      title: "金额",
+      dataIndex: "amount",
+      key: "amount",
+      align: "right",
       render: (text: React.ReactNode, _: unknown, index: number) =>
-        index < basicGoods.length ? (
-          text
-        ) : (
-          <span style={{ fontWeight: 600 }}>{text}</span>
-        ),
+        index < basicGoods.length ? text : <span style={{ fontWeight: 600 }}>{text}</span>,
     },
   ];
 
@@ -124,9 +116,7 @@ const ProfileBasicPage = () => {
           <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
           <Descriptions.Item label="联系电话">18100000000</Descriptions.Item>
           <Descriptions.Item label="常用快递">菜鸟仓储</Descriptions.Item>
-          <Descriptions.Item label="取货地址">
-            浙江省杭州市西湖区万塘路18号
-          </Descriptions.Item>
+          <Descriptions.Item label="取货地址">浙江省杭州市西湖区万塘路18号</Descriptions.Item>
           <Descriptions.Item label="备注">无</Descriptions.Item>
         </Descriptions>
         <Divider style={{ marginBottom: 32 }} />

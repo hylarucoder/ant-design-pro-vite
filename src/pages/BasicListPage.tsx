@@ -1,5 +1,5 @@
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
+import { DownOutlined, PlusOutlined } from "@ant-design/icons";
+import { PageContainer } from "@ant-design/pro-components";
 import {
   Avatar,
   Button,
@@ -12,13 +12,13 @@ import {
   Progress,
   Row,
   Segmented,
-} from 'antd';
-import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-import OperationModal from '@/pages/list/basic-list/components/OperationModal';
-import type { BasicListItemDataType } from '@/pages/list/basic-list/data.d';
-import useStyles from '@/pages/list/basic-list/style.style';
-import { loadBasicList, mutateBasicList } from '../data/demoList';
+} from "antd";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import OperationModal from "@/pages/list/basic-list/components/OperationModal";
+import type { BasicListItemDataType } from "@/pages/list/basic-list/data.d";
+import useStyles from "@/pages/list/basic-list/style.style";
+import { loadBasicList, mutateBasicList } from "../data/demoList";
 
 const { Search } = Input;
 
@@ -55,7 +55,7 @@ const ListContent = ({
       </div>
       <div className={styles.listContentItem}>
         <span>开始时间</span>
-        <p>{dayjs(createdAt).format('YYYY-MM-DD HH:mm')}</p>
+        <p>{dayjs(createdAt).format("YYYY-MM-DD HH:mm")}</p>
       </div>
       <div className={styles.listContentItem}>
         <Progress percent={percent} status={status} size={[180, 6]} />
@@ -68,9 +68,7 @@ const BasicListPage = () => {
   const { styles } = useStyles();
   const [done, setDone] = useState(false);
   const [open, setVisible] = useState(false);
-  const [current, setCurrent] = useState<
-    Partial<BasicListItemDataType> | undefined
-  >(undefined);
+  const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
   const [list, setList] = useState<BasicListItemDataType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -86,7 +84,7 @@ const BasicListPage = () => {
   }, []);
 
   const postRun = async (
-    method: 'add' | 'update' | 'remove',
+    method: "add" | "update" | "remove",
     params: Partial<BasicListItemDataType>,
   ) => {
     const result = await mutateBasicList(method, params);
@@ -106,23 +104,20 @@ const BasicListPage = () => {
   };
 
   const deleteItem = async (id: string) => {
-    await postRun('remove', { id });
+    await postRun("remove", { id });
   };
 
-  const editAndDelete = (
-    key: string | number,
-    currentItem: BasicListItemDataType,
-  ) => {
-    if (key === 'edit') {
+  const editAndDelete = (key: string | number, currentItem: BasicListItemDataType) => {
+    if (key === "edit") {
       showEditModal(currentItem);
       return;
     }
-    if (key === 'delete') {
+    if (key === "delete") {
       Modal.confirm({
-        title: '删除任务',
-        content: '确定删除该任务吗？',
-        okText: '确认',
-        cancelText: '取消',
+        title: "删除任务",
+        content: "确定删除该任务吗？",
+        okText: "确认",
+        cancelText: "取消",
         onOk: async () => deleteItem(currentItem.id),
       });
     }
@@ -135,8 +130,8 @@ const BasicListPage = () => {
           editAndDelete(key, item);
         },
         items: [
-          { key: 'edit', label: '编辑' },
-          { key: 'delete', label: '删除' },
+          { key: "edit", label: "编辑" },
+          { key: "delete", label: "删除" },
         ],
       }}
     >
@@ -154,7 +149,7 @@ const BasicListPage = () => {
 
   const handleSubmit = async (values: BasicListItemDataType) => {
     setDone(true);
-    await postRun(values?.id ? 'update' : 'add', values);
+    await postRun(values?.id ? "update" : "add", values);
   };
 
   const extraContent = (
@@ -162,9 +157,9 @@ const BasicListPage = () => {
       <Segmented
         defaultValue="all"
         options={[
-          { label: '全部', value: 'all' },
-          { label: '进行中', value: 'progress' },
-          { label: '等待中', value: 'waiting' },
+          { label: "全部", value: "all" },
+          { label: "进行中", value: "progress" },
+          { label: "等待中", value: "waiting" },
         ]}
       />
       <Search
@@ -198,7 +193,7 @@ const BasicListPage = () => {
             variant="borderless"
             title="基本列表"
             style={{ marginTop: 24 }}
-            styles={{ body: { padding: '0 32px 40px 32px' } }}
+            styles={{ body: { padding: "0 32px 40px 32px" } }}
             extra={extraContent}
           >
             <List
@@ -223,9 +218,7 @@ const BasicListPage = () => {
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={
-                      <Avatar src={item.logo} shape="square" size="large" />
-                    }
+                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />
@@ -241,7 +234,7 @@ const BasicListPage = () => {
         onClick={() => {
           setVisible(true);
         }}
-        style={{ width: '100%', marginBottom: 8 }}
+        style={{ width: "100%", marginBottom: 8 }}
       >
         <PlusOutlined />
         添加
