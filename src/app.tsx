@@ -1,156 +1,132 @@
-import { LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { SettingDrawer } from '@ant-design/pro-components';
-import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
-import React from 'react';
+import { Spin } from 'antd';
+import { lazy, Suspense } from 'react';
 import {
-  AvatarDropdown,
-  AvatarName,
-  Footer,
-  Question,
-  SelectLang,
-} from '@/components';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
-import defaultSettings from '../config/defaultSettings';
-import { errorConfig } from './requestErrorConfig';
-import '@ant-design/v5-patch-for-react-19';
+  Navigate,
+  Outlet,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
+import AppShell from './layout/AppShell';
+import { getStoredUser } from './services/auth';
 
-const isDev =
-  process.env.NODE_ENV === 'development' || process.env.CI;
-const loginPath = '/user/login';
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const AnalysisPage = lazy(() => import('./pages/AnalysisPage'));
+const AdvancedFormPage = lazy(() => import('./pages/AdvancedFormPage'));
+const AccountCenterPage = lazy(() => import('./pages/AccountCenterPage'));
+const AccountSettingsPage = lazy(() => import('./pages/AccountSettingsPage'));
+const BasicFormPage = lazy(() => import('./pages/BasicFormPage'));
+const BasicListPage = lazy(() => import('./pages/BasicListPage'));
+const CardListPage = lazy(() => import('./pages/CardListPage'));
+const Exception403Page = lazy(() => import('./pages/Exception403Page'));
+const Exception404Page = lazy(() => import('./pages/Exception404Page'));
+const Exception500Page = lazy(() => import('./pages/Exception500Page'));
+const MigrationPlanPage = lazy(() => import('./pages/MigrationPlanPage'));
+const MonitorPage = lazy(() => import('./pages/MonitorPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ProfileAdvancedPage = lazy(() => import('./pages/ProfileAdvancedPage'));
+const ProfileBasicPage = lazy(() => import('./pages/ProfileBasicPage'));
+const QueryTablePage = lazy(() => import('./pages/QueryTablePage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const RegisterResultPage = lazy(() => import('./pages/RegisterResultPage'));
+const ResultFailPage = lazy(() => import('./pages/ResultFailPage'));
+const ResultSuccessPage = lazy(() => import('./pages/ResultSuccessPage'));
+const SearchApplicationsPage = lazy(
+  () => import('./pages/SearchApplicationsPage'),
+);
+const SearchArticlesPage = lazy(() => import('./pages/SearchArticlesPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
+const SearchProjectsPage = lazy(() => import('./pages/SearchProjectsPage'));
+const StepFormPage = lazy(() => import('./pages/StepFormPage'));
+const WelcomePage = lazy(() => import('./pages/WelcomePage'));
+const WorkplacePage = lazy(() => import('./pages/WorkplacePage'));
 
-/**
- * @see https://umijs.org/docs/api/runtime-config#getinitialstate
- * */
-export async function getInitialState(): Promise<{
-  settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
-}> {
-  const fetchUserInfo = async () => {
-    try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
-      return msg.data;
-    } catch (_error) {
-      history.push(loginPath);
-    }
-    return undefined;
-  };
-  // 如果不是登录页面，执行
-  const { location } = history;
-  if (
-    ![loginPath, '/user/register', '/user/register-result'].includes(
-      location.pathname,
-    )
-  ) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
-    };
+const RequireAuth = () => {
+  const location = useLocation();
+  const currentUser = getStoredUser();
+
+  if (!currentUser) {
+    const redirect = `${location.pathname}${location.search}`;
+    return (
+      <Navigate
+        to={`/user/login?redirect=${encodeURIComponent(redirect)}`}
+        replace
+      />
+    );
   }
-  return {
-    fetchUserInfo,
-    settings: defaultSettings as Partial<LayoutSettings>,
-  };
-}
 
-// ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({
-  initialState,
-  setInitialState,
-}) => {
-  return {
-    actionsRender: () => [
-      <Question key="doc" />,
-      <SelectLang key="SelectLang" />,
-    ],
-    avatarProps: {
-      src: initialState?.currentUser?.avatar,
-      title: <AvatarName />,
-      render: (_, avatarChildren) => {
-        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
-      },
-    },
-    waterMarkProps: {
-      content: initialState?.currentUser?.name,
-    },
-    footerRender: () => <Footer />,
-    onPageChange: () => {
-      const { location } = history;
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
-      }
-    },
-    bgLayoutImgList: [
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
-        left: 85,
-        bottom: 100,
-        height: '303px',
-      },
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr',
-        bottom: -68,
-        right: -45,
-        height: '303px',
-      },
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr',
-        bottom: 0,
-        left: 0,
-        width: '331px',
-      },
-    ],
-    links: isDev
-      ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-        ]
-      : [],
-    menuHeaderRender: undefined,
-    // 自定义 403 页面
-    // unAccessible: <div>unAccessible</div>,
-    // 增加一个 loading 的状态
-    childrenRender: (children) => {
-      // if (initialState?.loading) return <PageLoading />;
-      return (
-        <>
-          {children}
-          {isDev && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
+  return <Outlet />;
+};
+
+const App = () => {
+  return (
+    <Router>
+      <Suspense
+        fallback={
+          <div className="route-loader">
+            <Spin size="large" />
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/user/login" element={<LoginPage />} />
+          <Route path="/user/register" element={<RegisterPage />} />
+          <Route
+            path="/user/register-result"
+            element={<RegisterResultPage />}
+          />
+          <Route element={<AppShell />}>
+            <Route
+              path="/"
+              element={<Navigate to="/dashboard/workplace" replace />}
             />
-          )}
-        </>
-      );
-    },
-    ...initialState?.settings,
-  };
+            <Route path="/welcome" element={<WelcomePage />} />
+            <Route path="/migration" element={<MigrationPlanPage />} />
+            <Route path="/result/success" element={<ResultSuccessPage />} />
+            <Route path="/result/fail" element={<ResultFailPage />} />
+            <Route path="/exception/403" element={<Exception403Page />} />
+            <Route path="/exception/404" element={<Exception404Page />} />
+            <Route path="/exception/500" element={<Exception500Page />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/dashboard/workplace" element={<WorkplacePage />} />
+              <Route path="/dashboard/analysis" element={<AnalysisPage />} />
+              <Route path="/dashboard/monitor" element={<MonitorPage />} />
+              <Route path="/form/basic-form" element={<BasicFormPage />} />
+              <Route path="/form/step-form" element={<StepFormPage />} />
+              <Route
+                path="/form/advanced-form"
+                element={<AdvancedFormPage />}
+              />
+              <Route path="/list/search" element={<SearchPage />}>
+                <Route index element={<Navigate to="articles" replace />} />
+                <Route path="articles" element={<SearchArticlesPage />} />
+                <Route path="projects" element={<SearchProjectsPage />} />
+                <Route
+                  path="applications"
+                  element={<SearchApplicationsPage />}
+                />
+              </Route>
+              <Route path="/list/table-list" element={<QueryTablePage />} />
+              <Route path="/list/basic-list" element={<BasicListPage />} />
+              <Route path="/list/card-list" element={<CardListPage />} />
+              <Route path="/profile/basic" element={<ProfileBasicPage />} />
+              <Route
+                path="/profile/advanced"
+                element={<ProfileAdvancedPage />}
+              />
+              <Route path="/account/center" element={<AccountCenterPage />} />
+              <Route
+                path="/account/settings"
+                element={<AccountSettingsPage />}
+              />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </Router>
+  );
 };
 
-/**
- * @name request 配置，可以配置错误处理
- * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
- * @doc https://umijs.org/docs/max/request#配置
- */
-export const request: RequestConfig = {
-  baseURL: 'https://proapi.azurewebsites.net',
-  ...errorConfig,
-};
+export default App;

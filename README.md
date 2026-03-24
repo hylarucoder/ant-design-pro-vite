@@ -1,19 +1,16 @@
 # Ant Design Pro Vite
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+> This repository is a Vite-oriented adaptation of [Ant Design Pro](https://pro.ant.design).
+> All credit for the original Ant Design Pro project belongs to the Ant Design Pro team.
+
+This project is based on Ant Design Pro. Follow the quick guide below to get started.
 
 ## Environment Prepare
 
 Install `node_modules`:
 
 ```bash
-npm install
-```
-
-or
-
-```bash
-yarn
+pnpm install
 ```
 
 ## Provided Scripts
@@ -25,33 +22,34 @@ Scripts provided in `package.json`. It's safe to modify or add additional script
 ### Start project
 
 ```bash
-npm start
+pnpm start
 ```
 
 ### Build project
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Check code style
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
 You can also use script to auto fix some lint error:
 
 ```bash
-npm run lint:fix
+pnpm lint:fix
 ```
 
 ### Test code
 
 ```bash
-npm test
+pnpm test
 ```
 
 ## More
 
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+You can view the original Ant Design Pro documentation on the [official website](https://pro.ant.design).
+If you want to learn more about the upstream project, visit the [Ant Design Pro GitHub repository](https://github.com/ant-design/ant-design-pro).

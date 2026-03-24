@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client", "node"],
+    "declaration": false,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "vite.config.ts",
+    "src/typings.d.ts",
+    "src/vite-env.d.ts",
+    "src/global.less",
+    "src/app.tsx",
+    "src/main.tsx",
+    "src/data/**/*.ts",
+    "src/hooks/**/*.ts",
+    "src/layout/**/*.tsx",
+    "src/pages/**/*.ts",
+    "src/pages/**/*.tsx",
+    "src/services/**/*.ts",
+    "src/types/**/*.ts",
+    "src/components/**/*.tsx"
+  ],
+  "exclude": ["src/.umi/**", "src/locales/**"]
+}

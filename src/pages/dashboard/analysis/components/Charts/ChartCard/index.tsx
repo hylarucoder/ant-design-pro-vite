@@ -91,10 +91,21 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     );
   };
 
-  const { loading = false, ...rest } = props;
+  const {
+    loading = false,
+    contentHeight: _contentHeight,
+    title: _title,
+    action: _action,
+    total: _total,
+    footer: _footer,
+    avatar: _avatar,
+    bordered,
+    ...rest
+  } = props;
   return (
     <Card
       loading={loading}
+      variant={bordered === false ? 'borderless' : rest.variant}
       styles={{
         body: {
           padding: '20px 24px 8px 24px',

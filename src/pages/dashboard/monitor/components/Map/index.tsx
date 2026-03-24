@@ -18,7 +18,31 @@ export default class MonitorMap extends React.Component {
     loading: false,
   };
 
+  private supportsWebGL() {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    try {
+      const canvas = document.createElement('canvas');
+      return Boolean(
+        window.WebGLRenderingContext &&
+          (canvas.getContext('webgl') ||
+            canvas.getContext('experimental-webgl')),
+      );
+    } catch {
+      return false;
+    }
+  }
+
   public async componentDidMount() {
+    if (!this.supportsWebGL()) {
+      this.setState({
+        loading: true,
+      });
+      return;
+    }
+
     const [geoData, gridData] = await Promise.all([
       fetch(
         'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
@@ -36,6 +60,22 @@ export default class MonitorMap extends React.Component {
 
   public render() {
     const { data, grid, loading } = this.state;
+    if (loading && !data && !grid) {
+      return (
+        <div
+          style={{
+            height: '452px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#999',
+            background: 'linear-gradient(180deg, #fafcff 0%, #f4f7fb 100%)',
+          }}
+        >
+          当前环境不支持地图渲染，已切换为占位展示
+        </div>
+      );
+    }
     return loading === false ? (
       <PageLoading />
     ) : (

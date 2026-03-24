@@ -8,13 +8,13 @@ export type EditableLink = {
   id?: string;
 };
 type EditableLinkGroupProps = {
-  onAdd: () => void;
+  onAdd?: () => void;
   links: EditableLink[];
   linkElement: any;
 };
 const EditableLinkGroup: React.FC<EditableLinkGroupProps> = (props) => {
   const { styles } = useStyles();
-  const { links = [], linkElement = 'a', onAdd = () => {} } = props;
+  const { links = [], linkElement = 'a', onAdd } = props;
   return (
     <div className={styles.linkGroup}>
       {links.map((link) =>
@@ -28,9 +28,11 @@ const EditableLinkGroup: React.FC<EditableLinkGroupProps> = (props) => {
           link.title,
         ),
       )}
-      <Button size="small" type="primary" ghost onClick={onAdd}>
-        <PlusOutlined /> 添加
-      </Button>
+      {onAdd ? (
+        <Button size="small" type="primary" ghost onClick={onAdd}>
+          <PlusOutlined /> 添加
+        </Button>
+      ) : null}
     </div>
   );
 };
