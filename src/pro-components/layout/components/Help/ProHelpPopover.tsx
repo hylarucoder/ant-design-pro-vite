@@ -48,7 +48,7 @@ export const ProHelpPopover: React.FC<ProHelpPopoverProps> = (props) => {
   const { wrapSSR } = useStyle(className);
   return wrapSSR(
     <Popover
-      styles={{ body: { padding: 0 } }}
+      styles={{ content: { padding: 0 } }}
       content={
         <div
           className={classNames(

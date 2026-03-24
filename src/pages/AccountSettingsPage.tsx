@@ -48,7 +48,7 @@ const BaseSettingsView = ({ currentUser }: { currentUser?: CurrentUser }) => {
                 ...currentUser,
                 phone: currentUser.phone.split("-"),
               }}
-              hideRequiredMark
+              requiredMark={false}
             >
               <ProFormText
                 width="md"

@@ -11,7 +11,7 @@ import type {
 } from "@ant-design/pro-utils";
 import type { SpinProps, TableProps } from "antd";
 import type { SizeType } from "antd/lib/config-provider/SizeContext";
-import type { LabelTooltipType } from "antd/lib/form/FormItemLabel";
+import type { FormItemTooltipType } from "antd/es/form/FormItemLabel";
 import type { NamePath } from "antd/lib/form/interface";
 import type { SearchProps } from "antd/lib/input";
 import type { ColumnFilterItem, ColumnType, CompareFn, SortOrder } from "antd/lib/table/interface";
@@ -341,7 +341,7 @@ export type ProTableProps<DataSource, U, ValueType = "text"> = {
   headerTitle?: React.ReactNode;
 
   /** @name 标题旁边的 tooltip */
-  tooltip?: string | LabelTooltipType;
+  tooltip?: string | FormItemTooltipType;
 
   /** @name 操作栏配置 */
   options?: OptionConfig | false;

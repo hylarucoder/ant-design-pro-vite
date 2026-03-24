@@ -27,9 +27,6 @@ import useStyles from "@/pages/profile/advanced/style.style";
 import { fetchAdvancedProfile } from "../data/account";
 import { useAsyncData } from "../hooks/useAsyncData";
 
-const { Step } = Steps;
-const ButtonGroup = Button.Group;
-
 const operationTabList = [
   { key: "tab1", tab: "操作日志一" },
   { key: "tab2", tab: "操作日志二" },
@@ -85,7 +82,7 @@ const ProfileAdvancedPage = () => {
           </Dropdown.Button>
         ) : (
           <Space>
-            <ButtonGroup>
+            <Space.Compact>
               <Button>操作一</Button>
               <Button>操作二</Button>
               <Dropdown
@@ -102,7 +99,7 @@ const ProfileAdvancedPage = () => {
                   <EllipsisOutlined />
                 </Button>
               </Dropdown>
-            </ButtonGroup>
+            </Space.Compact>
             <Button type="primary">主操作</Button>
           </Space>
         )
@@ -166,7 +163,7 @@ const ProfileAdvancedPage = () => {
       </div>
     );
     return status === "process" ? (
-      <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
+      <Popover placement="topLeft" arrow={{ pointAtCenter: true }} content={popoverContent}>
         <span>{dot}</span>
       </Popover>
     ) : (
@@ -224,12 +221,13 @@ const ProfileAdvancedPage = () => {
                   direction={isMobile ? "vertical" : "horizontal"}
                   progressDot={customDot}
                   current={1}
-                >
-                  <Step title="创建项目" description={desc1} />
-                  <Step title="部门初审" description={desc2} />
-                  <Step title="财务复核" />
-                  <Step title="完成" />
-                </Steps>
+                  items={[
+                    { title: "创建项目", description: desc1 },
+                    { title: "部门初审", description: desc2 },
+                    { title: "财务复核" },
+                    { title: "完成" },
+                  ]}
+                />
               )}
             </RouteContext.Consumer>
           </Card>

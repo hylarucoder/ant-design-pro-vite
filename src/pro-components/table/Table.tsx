@@ -967,7 +967,7 @@ const ProviderTableContainer = <
     props.ErrorBoundary === false ? React.Fragment : props.ErrorBoundary || ErrorBoundary;
 
   return (
-    <Container initValue={props}>
+    <Container initValue={props as any}>
       <ProConfigProvider needDeps>
         <ErrorComponent>
           <ProTable<DataType, Params, ValueType>

@@ -21,7 +21,7 @@ import {
 } from "@ant-design/pro-utils";
 import type { DescriptionsProps, FormInstance, FormProps } from "antd";
 import { ConfigProvider, Descriptions, Space, version } from "antd";
-import type { LabelTooltipType } from "antd/lib/form/FormItemLabel";
+import type { FormItemTooltipType } from "antd/es/form/FormItemLabel";
 import toArray from "rc-util/lib/Children/toArray";
 import get from "rc-util/lib/utils/get";
 import type { JSX } from "react";
@@ -107,7 +107,7 @@ export type ProDescriptionsProps<
 
   onLoadingChange?: (loading?: boolean) => void;
 
-  tooltip?: LabelTooltipType | string;
+  tooltip?: FormItemTooltipType | string;
   /** @deprecated 你可以使用 tooltip，这个更改是为了与 antd 统一 */
   tip?: string;
   /** Form props 的相关配置 */

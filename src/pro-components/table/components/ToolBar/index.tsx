@@ -4,7 +4,7 @@ import { useIntl } from "@ant-design/pro-provider";
 import { isDeepEqualReact, omitUndefined } from "@ant-design/pro-utils";
 import type { TableColumnType } from "antd";
 import { Tooltip } from "antd";
-import type { LabelTooltipType } from "antd/lib/form/FormItemLabel";
+import type { FormItemTooltipType } from "antd/es/form/FormItemLabel";
 import React, { useContext, useEffect, useMemo } from "react";
 import { TableContext } from "../../Store/Provide";
 import type { ActionType, OptionSearchProps, ProTableProps } from "../../typing";
@@ -43,7 +43,7 @@ export type OptionsType = OptionsFunctionType | boolean;
 
 export type ToolBarProps<T = unknown> = {
   headerTitle?: React.ReactNode;
-  tooltip?: string | LabelTooltipType;
+  tooltip?: string | FormItemTooltipType;
   /** @deprecated 你可以使用 tooltip，这个更改是为了与 antd 统一 */
   tip?: string;
   toolbar?: ListToolBarProps;
@@ -274,7 +274,7 @@ export type ToolbarRenderProps<T> = {
   onFormSearchSubmit: (params: any) => void;
   searchNode: React.ReactNode;
   tableColumn: any[];
-  tooltip?: string | LabelTooltipType;
+  tooltip?: string | FormItemTooltipType;
   selectedRows: T[];
   selectedRowKeys: React.Key[] | (string | number)[];
   headerTitle: React.ReactNode;

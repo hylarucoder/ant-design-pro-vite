@@ -1,7 +1,7 @@
 import { proTheme, useIntl } from "@ant-design/pro-provider";
 import { LabelIconTip, compareVersions } from "@ant-design/pro-utils";
 import { ConfigProvider, Input, TabPaneProps, Tabs, Tooltip, version } from "antd";
-import type { LabelTooltipType } from "antd/lib/form/FormItemLabel";
+import type { FormItemTooltipType } from "antd/es/form/FormItemLabel";
 import type { SearchProps } from "antd/lib/input";
 import classNames from "classnames";
 import ResizeObserver from "rc-resize-observer";
@@ -12,7 +12,7 @@ import { useStyle } from "./style";
 
 export type ListToolBarSetting = {
   icon: React.ReactNode;
-  tooltip?: LabelTooltipType | string;
+  tooltip?: FormItemTooltipType | string;
   key?: string;
   onClick?: (key?: string) => void;
 };
@@ -48,7 +48,7 @@ export type ListToolBarProps = {
   /** 副标题 */
   subTitle?: React.ReactNode;
   /** 标题提示 */
-  tooltip?: string | LabelTooltipType;
+  tooltip?: string | FormItemTooltipType;
   /** 搜索输入栏相关配置 */
   search?: SearchPropType;
   /** 搜索回调 */

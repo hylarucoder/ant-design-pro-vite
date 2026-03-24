@@ -93,21 +93,24 @@ export function useStyle(componentName, styleFn) {
       ? _token$proComponentsC
       : ".".concat(getPrefixCls("pro"));
   token.antCls = ".".concat(getPrefixCls());
+  useStyleRegister(
+    {
+      theme: provideTheme,
+      token: token,
+      path: [componentName],
+      nonce: csp === null || csp === void 0 ? void 0 : csp.nonce,
+      layer: {
+        name: "antd-pro",
+      },
+    },
+    function () {
+      return styleFn(token);
+    },
+  );
   return {
-    wrapSSR: useStyleRegister(
-      {
-        theme: provideTheme,
-        token: token,
-        path: [componentName],
-        nonce: csp === null || csp === void 0 ? void 0 : csp.nonce,
-        layer: {
-          name: "antd-pro",
-        },
-      },
-      function () {
-        return styleFn(token);
-      },
-    ),
+    wrapSSR: function wrapSSR(node) {
+      return node;
+    },
     hashId: hashed ? hashId : "",
   };
 }

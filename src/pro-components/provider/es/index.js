@@ -136,10 +136,21 @@ var ConfigProviderContainer = function ConfigProviderContainer(props) {
     locale = _useContext.locale,
     getPrefixCls = _useContext.getPrefixCls,
     restConfig = _objectWithoutProperties(_useContext, _excluded);
-  var tokenContext =
+  var rawTokenContext =
     (_proTheme$useToken = proTheme.useToken) === null || _proTheme$useToken === void 0
       ? void 0
       : _proTheme$useToken.call(proTheme);
+  var tokenContext =
+    rawTokenContext !== null &&
+    rawTokenContext !== void 0 &&
+    rawTokenContext.token &&
+    rawTokenContext.theme
+      ? rawTokenContext
+      : {
+          token: defaultToken,
+          theme: emptyTheme,
+          hashId: undefined,
+        };
   var proProvide = useContext(ProConfigContext);
 
   /**
@@ -209,17 +220,8 @@ var ConfigProviderContainer = function ConfigProviderContainer(props) {
       proComponentsCls: proComponentsCls,
     },
   );
-  var _useCacheToken = useCacheToken(
-      tokenContext.theme,
-      [tokenContext.token, finalToken !== null && finalToken !== void 0 ? finalToken : {}],
-      {
-        salt: salt,
-        override: finalToken,
-      },
-    ),
-    _useCacheToken2 = _slicedToArray(_useCacheToken, 2),
-    token = _useCacheToken2[0],
-    nativeHashId = _useCacheToken2[1];
+  var token = finalToken !== null && finalToken !== void 0 ? finalToken : {};
+  var nativeHashId = tokenContext.hashId || "pro-provider";
   var hashed = useMemo(
     function () {
       if (props.hashed === false) {

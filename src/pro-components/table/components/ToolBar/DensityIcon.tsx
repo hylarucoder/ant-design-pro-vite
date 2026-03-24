@@ -5,7 +5,7 @@ import { Dropdown, Tooltip } from "antd";
 import React, { useContext } from "react";
 import { TableContext } from "../../Store/Provide";
 
-export type DensitySize = "middle" | "small" | "large" | undefined;
+export type DensitySize = "middle" | "medium" | "small" | "large" | undefined;
 
 const DensityIcon = (props: { icon?: React.ReactNode }) => {
   const { icon = <ColumnHeightOutlined /> } = props;

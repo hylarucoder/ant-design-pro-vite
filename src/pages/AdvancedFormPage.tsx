@@ -144,7 +144,7 @@ const AdvancedFormPage = () => {
   return (
     <ProForm
       layout="vertical"
-      hideRequiredMark
+      requiredMark={false}
       submitter={{
         render: (_props, dom) => (
           <FooterToolbar>
