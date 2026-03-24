@@ -298,7 +298,7 @@ const QueryTablePage = () => {
         </FooterToolbar>
       )}
       <Drawer
-        width={600}
+        size={600}
         open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);

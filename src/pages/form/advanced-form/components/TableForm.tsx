@@ -141,7 +141,6 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
           return (
             <Input
               value={text}
-              autoFocus
               onChange={(e) => handleFieldChange(e, "name", record.key)}
               onKeyPress={(e) => handleKeyPress(e, record.key)}
               placeholder="成员姓名"

@@ -52,11 +52,11 @@ const ResultSuccessPage = () => {
             </Descriptions>
             <br />
             <Steps
-              progressDot
+              type="dot"
               current={1}
               items={[
-                { title: <span style={{ fontSize: 14 }}>创建项目</span>, description: desc1 },
-                { title: <span style={{ fontSize: 14 }}>部门初审</span>, description: desc2 },
+                { title: <span style={{ fontSize: 14 }}>创建项目</span>, content: desc1 },
+                { title: <span style={{ fontSize: 14 }}>部门初审</span>, content: desc2 },
                 { title: <span style={{ fontSize: 14 }}>财务复核</span> },
                 { title: <span style={{ fontSize: 14 }}>完成</span> },
               ]}

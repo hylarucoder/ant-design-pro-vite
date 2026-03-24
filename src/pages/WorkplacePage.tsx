@@ -1,6 +1,6 @@
 import { Radar } from "@ant-design/plots";
 import { PageContainer } from "@ant-design/pro-components";
-import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from "antd";
+import { Avatar, Card, Col, Row, Skeleton, Statistic } from "antd";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "react-router-dom";
@@ -173,30 +173,22 @@ const WorkplacePage = () => {
             title="动态"
             loading={loading}
           >
-            <List
-              loading={loading}
-              dataSource={activities}
-              className={styles.activitiesList}
-              size="large"
-              renderItem={(item) => (
-                <List.Item key={item.id}>
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.user.avatar} />}
-                    title={
-                      <span>
-                        <span className={styles.username}>{item.user.name}</span>{" "}
-                        <span className={styles.event}>{renderActivityText(item)}</span>
-                      </span>
-                    }
-                    description={
-                      <span className={styles.datetime} title={item.updatedAt}>
-                        {dayjs(item.updatedAt).fromNow()}
-                      </span>
-                    }
-                  />
-                </List.Item>
-              )}
-            />
+            <div className={styles.activitiesList}>
+              {activities.map((item) => (
+                <div key={item.id} className={styles.activityItem}>
+                  <Avatar src={item.user.avatar} />
+                  <div className={styles.activityMeta}>
+                    <div>
+                      <span className={styles.username}>{item.user.name}</span>{" "}
+                      <span className={styles.event}>{renderActivityText(item)}</span>
+                    </div>
+                    <span className={styles.datetime} title={item.updatedAt}>
+                      {dayjs(item.updatedAt).fromNow()}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Card>
         </Col>
 

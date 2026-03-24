@@ -285,7 +285,12 @@ function BaseFormComponents(props) {
   var items = useMemo(
     function () {
       return React.Children.toArray(children).map(function (item, index) {
-        if (index === 0 && /*#__PURE__*/ React.isValidElement(item) && autoFocusFirstInput) {
+        if (
+          index === 0 &&
+          /*#__PURE__*/ React.isValidElement(item) &&
+          autoFocusFirstInput &&
+          item.type !== React.Fragment
+        ) {
           return /*#__PURE__*/ React.cloneElement(
             item,
             _objectSpread(

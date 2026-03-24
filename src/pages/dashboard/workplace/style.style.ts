@@ -5,6 +5,23 @@ const useStyles = createStyles(({ token }) => {
     activitiesList: {
       padding: 0,
     },
+    activityItem: {
+      display: "flex",
+      alignItems: "flex-start",
+      gap: "16px",
+      padding: "16px 0",
+      borderBottom: `1px solid ${token.colorSplit}`,
+      "&:last-child": {
+        borderBottom: "none",
+      },
+    },
+    activityMeta: {
+      flex: 1,
+      minWidth: 0,
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+    },
     username: {
       color: token.colorText,
     },

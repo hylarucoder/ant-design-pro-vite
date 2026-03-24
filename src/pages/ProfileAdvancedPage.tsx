@@ -149,7 +149,7 @@ const ProfileAdvancedPage = () => {
     </div>
   );
 
-  const customDot = (dot: React.ReactNode, { status }: { status: string }) => {
+  const customDot = (dot: React.ReactNode, { active }: { active: boolean }) => {
     const popoverContent = (
       <div style={{ width: 160 }}>
         吴加号
@@ -162,7 +162,7 @@ const ProfileAdvancedPage = () => {
         <div style={{ marginTop: 4 }}>耗时：2小时25分钟</div>
       </div>
     );
-    return status === "process" ? (
+    return active ? (
       <Popover placement="topLeft" arrow={{ pointAtCenter: true }} content={popoverContent}>
         <span>{dot}</span>
       </Popover>
@@ -218,12 +218,13 @@ const ProfileAdvancedPage = () => {
             <RouteContext.Consumer>
               {({ isMobile }) => (
                 <Steps
-                  direction={isMobile ? "vertical" : "horizontal"}
-                  progressDot={customDot}
+                  orientation={isMobile ? "vertical" : "horizontal"}
+                  type="dot"
+                  iconRender={customDot}
                   current={1}
                   items={[
-                    { title: "创建项目", description: desc1 },
-                    { title: "部门初审", description: desc2 },
+                    { title: "创建项目", content: desc1 },
+                    { title: "部门初审", content: desc2 },
                     { title: "财务复核" },
                     { title: "完成" },
                   ]}

@@ -116,7 +116,12 @@ var Group = /*#__PURE__*/ React.forwardRef(function (props, ref) {
             hiddenChildren.push(element);
             return null;
           }
-          if (index === 0 && /*#__PURE__*/ React.isValidElement(element) && autoFocus) {
+          if (
+            index === 0 &&
+            /*#__PURE__*/ React.isValidElement(element) &&
+            autoFocus &&
+            element.type !== React.Fragment
+          ) {
             return /*#__PURE__*/ React.cloneElement(
               element,
               _objectSpread(
