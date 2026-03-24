@@ -7,6 +7,16 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+      "@ant-design/pro-card": path.resolve(__dirname, "src/pro-components/card/es"),
+      "@ant-design/pro-components": path.resolve(__dirname, "src/pro-components"),
+      "@ant-design/pro-descriptions": path.resolve(__dirname, "src/pro-components/descriptions"),
+      "@ant-design/pro-field": path.resolve(__dirname, "src/pro-components/field/es"),
+      "@ant-design/pro-form": path.resolve(__dirname, "src/pro-components/form/es"),
+      "@ant-design/pro-layout": path.resolve(__dirname, "src/pro-components/layout"),
+      "@ant-design/pro-provider": path.resolve(__dirname, "src/pro-components/provider/es"),
+      "@ant-design/pro-skeleton": path.resolve(__dirname, "src/pro-components/skeleton/es"),
+      "@ant-design/pro-table": path.resolve(__dirname, "src/pro-components/table"),
+      "@ant-design/pro-utils": path.resolve(__dirname, "src/pro-components/utils/es"),
     },
   },
   css: {
@@ -46,7 +56,13 @@ export default defineConfig({
             return "router";
           }
 
-          if (id.includes("@ant-design/pro-components") || id.includes("@ant-design/pro-form")) {
+          if (
+            id.includes("src/pro-components") ||
+            id.includes("@ant-design/pro-form") ||
+            id.includes("@ant-design/pro-layout") ||
+            id.includes("@ant-design/pro-table") ||
+            id.includes("@ant-design/pro-descriptions")
+          ) {
             return "pro-components";
           }
 

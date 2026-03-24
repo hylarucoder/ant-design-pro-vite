@@ -7,7 +7,17 @@
     "types": ["vite/client", "node", "vitest/globals"],
     "declaration": false,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@ant-design/pro-card": ["./pro-components/card/es/index"],
+      "@ant-design/pro-components": ["./pro-components/index.ts"],
+      "@ant-design/pro-descriptions": ["./pro-components/descriptions/index.tsx"],
+      "@ant-design/pro-field": ["./pro-components/field/es/index"],
+      "@ant-design/pro-form": ["./pro-components/form/es/index"],
+      "@ant-design/pro-layout": ["./pro-components/layout/index.tsx"],
+      "@ant-design/pro-provider": ["./pro-components/provider/es/index"],
+      "@ant-design/pro-skeleton": ["./pro-components/skeleton/es/index"],
+      "@ant-design/pro-table": ["./pro-components/table/index.tsx"],
+      "@ant-design/pro-utils": ["./pro-components/utils/es/index"]
     }
   },
   "include": [
@@ -23,6 +33,8 @@
     "src/layout/**/*.tsx",
     "src/pages/**/*.ts",
     "src/pages/**/*.tsx",
+    "src/pro-components/**/*.ts",
+    "src/pro-components/**/*.tsx",
     "src/services/**/*.ts",
     "src/types/**/*.ts",
     "src/components/**/*.tsx",
